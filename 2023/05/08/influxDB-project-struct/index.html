@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fzquantum">
+    
+    <title>
+        
+            influxdb源码阅读 -- 项目结构 |
+        
+        Fzquantum-Archives
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/bitbug_favicon_48.ico">
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"f2quantum.github.io","root":"/","language":"zh-cn","path":"search.json"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/bitbug_favicon_48.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null}},"post":{"word_count":{"enable":false,"wordcount":false,"min2read":false},"author_label":{"enable":true,"auto":true,"custom_label_list":["Trainee","Engineer","Architect","CTO","BOSS"]}},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/bitbug_favicon_48.ico">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Fzquantum-Archives
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友鏈
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友鏈</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">influxdb源码阅读 -- 项目结构</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Fzquantum</span>
+                            
+                                <span class="author-label">Lv3</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-05-08 22:36:45</span>
+        <span class="mobile">2023-05-08 22:36</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-07-02 15:25:26</span>
+    </span>
+    
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">├─authorizer   验证信息</span><br><span class="line">├─bolt                       与bbolt交互的库</span><br><span class="line">├─chronograf            提供了一个可视化的监控界面</span><br><span class="line">├── cmd</span><br><span class="line">│   ├── chronograf-migrator </span><br><span class="line">│   ├── influx influx      客户端CLI</span><br><span class="line">│   ├── influx_inspect  influx探针</span><br><span class="line">│   ├── influxd             influx服务CLI</span><br><span class="line">│   └── telemetryd     用户信息征集</span><br><span class="line">├── context   与上下文有关的类</span><br><span class="line">├── docker 与docker有关的类</span><br><span class="line">│   ├── flux   </span><br><span class="line">│   └── influxd</span><br><span class="line">├── docs    用于存放文档，目前主要存在升级相关事项文档</span><br><span class="line">├── endpoints TODO 暂时不知道做什么的。是对原有的endpoints服务进行了一次重构，且抽离出来的</span><br><span class="line">├── etc 提供了一些常用脚本</span><br><span class="line">├── flux influx的客户端代码</span><br><span class="line">├── gather 收集器</span><br><span class="line">├── http 对外提供了http接口的目录</span><br><span class="line">│   ├── influxdb</span><br><span class="line">│   ├── metric</span><br><span class="line">│   └── mock</span><br><span class="line">├── inmem 服务内部的内存数据管理</span><br><span class="line">│   └── kvdata</span><br><span class="line">├── internal 内部服务</span><br><span class="line">│   ├── fs 文件相关</span><br><span class="line">│   ├── gogoproto</span><br><span class="line">│   ├── testutil</span><br><span class="line">│   └── yaml2json</span><br><span class="line">├── jsonweb jwt相关服务</span><br><span class="line">├── kit 工具集 </span><br><span class="line">│   ├── check</span><br><span class="line">│   ├── cli</span><br><span class="line">│   ├── errors</span><br><span class="line">│   ├── grpc</span><br><span class="line">│   ├── metric</span><br><span class="line">│   ├── prom</span><br><span class="line">│   ├── signals</span><br><span class="line">│   ├── tracing</span><br><span class="line">│   └── transport</span><br><span class="line">├── kv TODO 看上去像是K/V存储，用于缓存内部的一些信息。</span><br><span class="line">├── logger 日志相关</span><br><span class="line">├── mock mock数据，用于测试</span><br><span class="line">├── models 定义了一些数据模型</span><br><span class="line">│   └── testdata</span><br><span class="line">├── nats NATS队列中间件相关</span><br><span class="line">├── notification TODO 暂时看不出是做什么的</span><br><span class="line">│   ├── check</span><br><span class="line">│   ├── endpoint</span><br><span class="line">│   ├── flux</span><br><span class="line">│   └── rule</span><br><span class="line">├── pkg  一些内部常用的包</span><br><span class="line">│   ├── binaryutil</span><br><span class="line">│   ├── bloom</span><br><span class="line">│   ├── bytesutil</span><br><span class="line">│   ├── data</span><br><span class="line">│   ├── encoding</span><br><span class="line">│   ├── escape</span><br><span class="line">│   ├── estimator</span><br><span class="line">│   ├── fs</span><br><span class="line">│   ├── httpc</span><br><span class="line">│   ├── jsonnet</span><br><span class="line">│   ├── jsonparser</span><br><span class="line">│   ├── lifecycle</span><br><span class="line">│   ├── limiter</span><br><span class="line">│   ├── metrics</span><br><span class="line">│   ├── mmap</span><br><span class="line">│   ├── pointer</span><br><span class="line">│   ├── pool</span><br><span class="line">│   ├── rhh</span><br><span class="line">│   ├── slices</span><br><span class="line">│   ├── snowflake</span><br><span class="line">│   ├── testing</span><br><span class="line">│   └── testttp</span><br><span class="line">├── pkger TODO 暂时看不出是做什么的</span><br><span class="line">│   └── testdata</span><br><span class="line">├── predicate TODO 暂时看不出是做什么的</span><br><span class="line">├── prometheus WTF ?? TODO 暂时看不出是做什么的</span><br><span class="line">├── query  TODO 又是一个船新的HTTP服务，用于 Flux 查询的，但是不知道和http之间的关联</span><br><span class="line">│   ├── benchmarks</span><br><span class="line">│   ├── builtin</span><br><span class="line">│   ├── control</span><br><span class="line">│   ├── influxql</span><br><span class="line">│   ├── mock</span><br><span class="line">│   ├── promql</span><br><span class="line">│   ├── querytest</span><br><span class="line">│   └── stdlib</span><br><span class="line">├── rand 随机生成器，包含ID/Token</span><br><span class="line">├── resource 定义了资源的实体，资源实体包含了organization/task/bucket/user</span><br><span class="line">│   └── noop</span><br><span class="line">├── scripts 包含了一些协议相关的shell文件，这个文件为什么不会合并在etc里?</span><br><span class="line">├── snowflake 雪花算法ID生成器</span><br><span class="line">├── source 与版本兼容相关的类，包含了UI/v1/v2</span><br><span class="line">├── storage TODO 字面意思是存储，但是实际作用还不清楚</span><br><span class="line">│   ├── compat</span><br><span class="line">│   ├── reads</span><br><span class="line">│   ├── readservice</span><br><span class="line">│   └── wal</span><br><span class="line">├── task 任务相关</span><br><span class="line">│   ├── backend </span><br><span class="line">│   ├── mock</span><br><span class="line">│   ├── options</span><br><span class="line">│   └── servicetest</span><br><span class="line">├── telegraf TODO 不知道做啥的</span><br><span class="line">│   └── plugins</span><br><span class="line">├── telemetry 用于从普罗米修斯接收数据的数据收集器</span><br><span class="line">├── testing 测试相关</span><br><span class="line">├── toml toml解析类。(所以这个为什么不放在pkg目录里)</span><br><span class="line">├── tools TODO 工具类，但是具体也不知道做什么的</span><br><span class="line">│   └── tmpl</span><br><span class="line">├── tsdb TODO 暂时不知道是做什么的</span><br><span class="line">│   ├── cursors</span><br><span class="line">│   ├── internal</span><br><span class="line">│   ├── testdata</span><br><span class="line">│   ├── tsi1</span><br><span class="line">│   ├── tsm1</span><br><span class="line">│   └── value</span><br><span class="line">├── ui 后台管理界面</span><br><span class="line">│   ├── __mocks__</span><br><span class="line">│   ├── assets</span><br><span class="line">│   ├── build</span><br><span class="line">│   ├── cypress</span><br><span class="line">│   ├── mocks</span><br><span class="line">│   ├── scripts</span><br><span class="line">│   └── src</span><br><span class="line">├── uuid 用于生成UUID。所以，这个为什么不放在pkg里</span><br><span class="line">├── vault 与valut相关的文件</span><br><span class="line">├── write 写入</span><br><span class="line">└── zap 与zap日志相关的文件</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/yinggaozhen/GoLearn/issues/43" >https://github.com/yinggaozhen/GoLearn/issues/43<i class="fas fa-external-link-alt"></i></a></p>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/06/28/big-data-is-dead/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">大数据已死</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/03/24/2023-meituan-intern/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">2023_meituan_intern</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Fzquantum</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+        
+    
+</div>
+
+
+
+</body>
+</html>

@@ -29,8 +29,8 @@
 
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"121.89.218.85","root":"/","language":"zh-cn","path":"search.json"}
-    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/bitbug_favicon_48.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null}},"post":{"word_count":{"enable":false,"wordcount":false,"min2read":false},"author_label":{"enable":true,"auto":true,"custom_label_list":["Trainee","Engineer","Architect","CTO","BOSS"]}},"version":"3.6.1"}
+    KEEP.hexo_config = {"hostname":"f2quantum.github.io","root":"/","language":"zh-cn","path":"search.json"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/bitbug_favicon_48.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null}},"post":{"word_count":{"enable":false,"wordcount":false,"min2read":false},"author_label":{"enable":true,"auto":true,"custom_label_list":["Trainee","Engineer","Architect","CTO","BOSS"]}},"version":"3.6.1"}
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
     KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
     KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
@@ -188,7 +188,7 @@ mjx-container[display="true"] + br {
                         >
                             
                                 
-                                    <a target="_blank" href="https://github.com/xrervip">
+                                    <a target="_blank" href="https://github.com/f2quantum">
                                         <i class="fab fa-github"></i>
                                     </a>
                                 
@@ -243,7 +243,7 @@ mjx-container[display="true"] + br {
                             <a class="active"
                                href="/"
                             >
-                                HOME
+                                首頁
                             </a>
                         </li>
                     
@@ -251,7 +251,7 @@ mjx-container[display="true"] + br {
                             <a class=""
                                href="/archives"
                             >
-                                ARCHIVES
+                                歸檔
                             </a>
                         </li>
                     
@@ -259,7 +259,7 @@ mjx-container[display="true"] + br {
                             <a class=""
                                href="/tags"
                             >
-                                TAGS
+                                標籤
                             </a>
                         </li>
                     
@@ -267,7 +267,7 @@ mjx-container[display="true"] + br {
                             <a class=""
                                href="/links"
                             >
-                                LINKS
+                                友鏈
                             </a>
                         </li>
                     
@@ -275,14 +275,20 @@ mjx-container[display="true"] + br {
                             <a class=""
                                href="/about"
                             >
-                                ABOUT
+                                關於
                             </a>
                         </li>
                     
                     
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
                 </ul>
             </div>
             <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
                 <div class="icon-item menu-bar">
                     <div class="menu-bar-middle"></div>
@@ -296,27 +302,27 @@ mjx-container[display="true"] + br {
             
                 <li class="drawer-menu-item flex-center">
                     <a class="active"
-                       href="/">HOME</a>
+                       href="/">首頁</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives">歸檔</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/tags">標籤</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/links">LINKS</a>
+                       href="/links">友鏈</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/about">ABOUT</a>
+                       href="/about">關於</a>
                 </li>
             
         </ul>
@@ -336,6 +342,113 @@ mjx-container[display="true"] + br {
                 
                     <div class="home-content-container fade-in-down-animation">
     <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/06/30/Some-point-of-view-on-OS/">
+                        6月随记 计算机工程方向可以研究的几个点
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        Some Point
+进程调度算法 : MLFQ 被Linux，Windows广泛应用的算法
+文件系统 : i-node作为Linux文件系统的精髓
+死锁检测算法: 资源图检测死锁 ,银行家算法无法实际用到
+
+Book RecommendOS Thr...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Sun Jul 02 2023 15:25:26 GMT+0800">
+                2023-07-02
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a class="read-more" href="/2023/06/30/Some-point-of-view-on-OS/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/06/28/big-data-is-dead/">
+                        大数据已死
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        大数据时代已经结束了，大数据的存储和分析，作为一个技术问题已经解决了。    —— Jordan Tigani
+大数据起源于谷歌于2003年起发布一系列论文（大数据三驾马车）
+
+GFS 的论文《The Google File System 》发表于 ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Sun Jul 02 2023 15:25:26 GMT+0800">
+                2023-07-02
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a class="read-more" href="/2023/06/28/big-data-is-dead/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/05/08/influxDB-project-struct/">
+                        influxdb源码阅读 -- 项目结构
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        项目结构1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Sun Jul 02 2023 15:25:26 GMT+0800">
+                2023-07-02
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a class="read-more" href="/2023/05/08/influxDB-project-struct/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
         
             <li class="home-article-item">
 
@@ -363,7 +476,7 @@ mjx-container[display="true"] + br {
     <div class="home-article-meta-info">
         <span>
             <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Fri Mar 24 2023 22:30:34 GMT+0800">
+            <span class="home-article-date" data-updated="Fri Mar 24 2023 22:40:36 GMT+0800">
                 2023-03-24
             </span>
         </span>
@@ -371,7 +484,119 @@ mjx-container[display="true"] + br {
         
     </div>
 
-    <a class="read-more" href="/2023/03/24/2023-meituan-intern/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2023/03/24/2023-meituan-intern/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/02/05/jvm-memory-model/">
+                        图解 Java 内存模型
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        1. Java 内存模型的总体设计Java 虚拟机在执行 Java 程序的过程中会把它管理的内存划分成若干个不同的数据区域
+线程私有的：
+
+  程序计数器
+  虚拟机栈
+  本地方法栈
+
+线程共享的：
+
+  堆
+  方法区 （JDK1.7及之前）
+ ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Sun Jul 02 2023 15:25:26 GMT+0800">
+                2023-07-02
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a class="read-more" href="/2023/02/05/jvm-memory-model/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/01/24/io-multiplexing-select-poll-epoll/">
+                        IO多路复用中的select poll和epoll
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        Select ,Poll 和Epoll目前流程的多路复用IO实现主要包括四种: select、poll、epoll
+select函数签名与参数
+123456int select(int nfds,            fd_set *restric...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Sun Jul 02 2023 15:25:26 GMT+0800">
+                2023-07-02
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a class="read-more" href="/2023/01/24/io-multiplexing-select-poll-epoll/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2023/01/24/unix-io-java-impl/">
+                        Java IO 模型笔记
+                    </a>
+                </h3>
+
+                <div class="home-article-content keep-markdown-body">
+                    
+                        0.UNXI IO模型简介在 Unix 系统里，磁盘的文件读写、网络通讯等功能的核心部分都是 I/O， open， read ， write ，connect 等系统调用都属于 I/O 操作。因为 I/O 操作都比较耗时，因此有了阻塞、非阻塞、同步、...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span>
+            <i class="fas fa-history"></i>&nbsp;
+            <span class="home-article-date" data-updated="Sun Jul 02 2023 15:25:26 GMT+0800">
+                2023-07-02
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a class="read-more" href="/2023/01/24/unix-io-java-impl/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -404,7 +629,7 @@ mjx-container[display="true"] + br {
         
     </div>
 
-    <a class="read-more" href="/2022/07/12/EaCRS/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2022/07/12/EaCRS/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -438,7 +663,7 @@ mjx-container[display="true"] + br {
         
     </div>
 
-    <a class="read-more" href="/2022/07/03/redmi2linux/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2022/07/03/redmi2linux/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -472,248 +697,7 @@ mjx-container[display="true"] + br {
         
     </div>
 
-    <a class="read-more" href="/2022/02/13/AmongUs20210630/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/01/15/Multidimensional-Sparse-Array/">
-                        多维稀疏矩阵行储存压缩研究
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        PATRICIA 字典树压缩储存扩展压缩行储存CRS/列储存CCS方法概述在CRS方法的基础上，将维度从二维的行和列扩展到k-维空间(k&gt;2),进而提出了扩展CRS的方法xCRS/xCCS，考虑到CRS和CCS高度的相似性，因此我们只讨论CRS...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Fri Mar 24 2023 21:06:58 GMT+0800">
-                2023-03-24
-            </span>
-        </span>
-        
-        
-    </div>
-
-    <a class="read-more" href="/2022/01/15/Multidimensional-Sparse-Array/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/01/10/my-game-of-the-year/">
-                        个人年度游戏评价总结
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        仅评价2021财年发布的单机作品或持续运营的在线游戏，全是个人主观喜好，没有一丢丢客观，人生建议有风险，涉及剧透须谨慎。
-我的年度最佳游戏继往开来的《生化危机8》经过《生化危机7》对第一人称和重新走回生存恐怖的道路的试水，《生化危机8》从各个方面都是...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Fri Mar 24 2023 21:06:58 GMT+0800">
-                2023-03-24
-            </span>
-        </span>
-        
-        
-    </div>
-
-    <a class="read-more" href="/2022/01/10/my-game-of-the-year/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/01/04/sparse-matrix-compress/">
-                        稀疏矩阵压缩研究
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        1. 矩阵（稀疏矩阵）压缩存储（3种方式）数据结构中，提供针对某些特殊矩阵的压缩存储结构。存储矩阵的一般方法是采用二维数组，其优点是可以随机地访问每一个元素，因而能够容易实现矩阵的各种运算。
-对于稀疏矩阵，它通常具有很大的维度，有时甚大到整个矩阵（零...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Fri Mar 24 2023 21:06:58 GMT+0800">
-                2023-03-24
-            </span>
-        </span>
-        
-        
-    </div>
-
-    <a class="read-more" href="/2022/01/04/sparse-matrix-compress/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/10/19/invitToTeamspeak3/">
-                        欢迎使用teamspeak3
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        
-
-
-
-TeamSpeak 3 Server Invitation
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-You have been invited to this TeamSpeak 3 Server:
-
-
-    
-    121.89...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Fri Mar 24 2023 21:06:58 GMT+0800">
-                2023-03-24
-            </span>
-        </span>
-        
-        
-    </div>
-
-    <a class="read-more" href="/2021/10/19/invitToTeamspeak3/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/10/02/powershellDownload/">
-                        使用PowerShell下载文件
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        使用PowerShell下载文件
-1powershell (new-object System.Net.WebClient).DownloadFile(&#x27;文件的URL&#x27;,&#x27;文件本地存储的地址&#x27;)
-例如
-1pow...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Fri Mar 24 2023 21:06:58 GMT+0800">
-                2023-03-24
-            </span>
-        </span>
-        
-        
-    </div>
-
-    <a class="read-more" href="/2021/10/02/powershellDownload/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/09/01/Database-transaction-processing-technology-failure-recovery/">
-                        数据库事务处理技术-故障恢复
-                    </a>
-                </h3>
-
-                <div class="home-article-content keep-markdown-body">
-                    
-                        第23讲 数据库事务处理技术-故障恢复数据库的故障类型及其影响典型的数据库故障
-
-事务故障某一个程序(事务)自身运行错误所引起的故障影响该程序(事务)本身
-
-系统故障
-由于掉电、非正常关机等所引起的故障影响正在运行的事务以及数据库缓冲区, 数据库缓冲...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span>
-            <i class="fas fa-history"></i>&nbsp;
-            <span class="home-article-date" data-updated="Fri Mar 24 2023 21:06:58 GMT+0800">
-                2023-03-24
-            </span>
-        </span>
-        
-        
-    </div>
-
-    <a class="read-more" href="/2021/09/01/Database-transaction-processing-technology-failure-recovery/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a class="read-more" href="/2022/02/13/AmongUs20210630/">繼續閱讀...&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -727,7 +711,7 @@ You have been invited to this TeamSpeak 3 Server:
     
         <a class="next btn"
            href="/page/2/"
-        >Next</a>
+        >下一頁</a>
     
 </div>
 
@@ -757,7 +741,7 @@ You have been invited to this TeamSpeak 3 Server:
         </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
         </div>
         
         
@@ -814,6 +798,35 @@ You have been invited to this TeamSpeak 3 Server:
 
 
     
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
 
 </main>
 
@@ -833,6 +846,10 @@ You have been invited to this TeamSpeak 3 Server:
 
 
 
+
+
+    
+<script src="/js/local-search.js"></script>
 
 
 

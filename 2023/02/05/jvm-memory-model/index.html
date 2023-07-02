@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fzquantum">
+    
+    <title>
+        
+            图解 Java 内存模型 |
+        
+        Fzquantum-Archives
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/bitbug_favicon_48.ico">
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"f2quantum.github.io","root":"/","language":"zh-cn","path":"search.json"}
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/bitbug_favicon_48.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null}},"post":{"word_count":{"enable":false,"wordcount":false,"min2read":false},"author_label":{"enable":true,"auto":true,"custom_label_list":["Trainee","Engineer","Architect","CTO","BOSS"]}},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/bitbug_favicon_48.ico">
+                </a>
+            
+            <a class="logo-title" href="/">
+               Fzquantum-Archives
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首頁
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                歸檔
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                標籤
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友鏈
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                關於
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首頁</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">歸檔</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">標籤</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友鏈</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">關於</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">图解 Java 内存模型</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Fzquantum</span>
+                            
+                                <span class="author-label">Lv3</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-02-05 16:29:21</span>
+        <span class="mobile">2023-02-05 16:29</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-07-02 15:25:26</span>
+    </span>
+    
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h1 id="1-Java-内存模型的总体设计"><a href="#1-Java-内存模型的总体设计" class="headerlink" title="1. Java 内存模型的总体设计"></a>1. Java 内存模型的总体设计</h1><p>Java 虚拟机在执行 Java 程序的过程中会把它管理的内存划分成若干个不同的数据区域</p>
+<p><strong>线程私有的：</strong></p>
+<ul>
+<li>  程序计数器</li>
+<li>  虚拟机栈</li>
+<li>  本地方法栈</li>
+</ul>
+<p><strong>线程共享的：</strong></p>
+<ul>
+<li>  堆</li>
+<li>  方法区 （JDK1.7及之前）</li>
+<li>  直接内存 （JDK1.7及之前）</li>
+<li>  元空间 （JDK1.8及之后）</li>
+</ul>
+<p>其结构如下图所示：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pS6LMPe"><img src="https://s1.ax1x.com/2023/02/05/pS6LMPe.png" alt="pS6LMPe.png"></a></p>
+<h1 id="2-线程共享区（堆与方法区）的设计"><a href="#2-线程共享区（堆与方法区）的设计" class="headerlink" title="2. 线程共享区（堆与方法区）的设计"></a>2. 线程共享区（堆与方法区）的设计</h1><p>堆是 JVM 内存中最大的一块内存空间，该内存被所有线程共享，几乎所有对象和数组都被分配到了堆内存中。堆被划分为新生代和老年代，新生代又被进一步划分为 <code>Eden</code> 和 <code>Survivor</code> 区，最后 <code>Survivor</code> 由 <code>From Survivor</code> 和 <code>To Survivor</code> 组成，新生代中的 <code>Eden:From Survivor:To Survivor</code> 的比例是 8:1:1。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pS6LnUO"><img src="https://s1.ax1x.com/2023/02/05/pS6LnUO.png" alt="pS6LnUO.png"></a></p>
+<h2 id="2-1-新生代"><a href="#2-1-新生代" class="headerlink" title="2.1 新生代"></a>2.1 新生代</h2><p><strong>新生带（年轻代）</strong>：新对象和没达到一定年龄的对象都在新生代</p>
+<ul>
+<li><strong>Eden 区</strong> ：<br>  Java 新对象的出生地（如果新创建的对象占用内存很大，则直接分配到老  年代）。当 Eden 区内存不够的时候就会触发 MinorGC，对新生代区进行  一次垃圾回收。</li>
+</ul>
+<ul>
+<li> <strong>S1(ServivorFrom):</strong><br>上一次 GC 的幸存者，作为这一次 GC 的被扫描者。</li>
+<li><strong>S2(ServivorTo):</strong><br>保留了一次 MinorGC 过程中的幸存者。</li>
+</ul>
+<p>系统执行Minor GC时，将把 Eden 和 ServivorFrom 区域中存活的对象从Eden区和From区复制到另一个幸存者空间To区后并将原位置清空，然后交换From区和To区的标记，所以每次，总有一个幸存者空间总是空的</p>
+<p>经过多次 GC 循环后（15），存活下来的对象被移动到老年代。通常，这是通过设置年轻一代对象的年龄阈值来实现的，然后他们才有资格提升到老一代。</p>
+<h2 id="2-2-老年代"><a href="#2-2-老年代" class="headerlink" title="2.2 老年代"></a>2.2 老年代</h2><p>主要存放应用程序中生命周期长的内存对象。</p>
+<p>老年代的对象比较稳定，所以 MajorGC 不会频繁执行。在进行 MajorGC 前一般都先进行  了一次 MinorGC，使得有新生代的对象晋身入老年代，导致空间不够用时才触发。当无法找到足  够大的连续空间分配给新创建的较大对象时也会提前触发一次 MajorGC 进行垃圾回收腾出空间。   </p>
+<p>MajorGC 采用标记清除算法：首先扫描一次所有老年代，标记出存活的对象，然后回收没  有标记的对象。MajorGC 的耗时比较长，因为要扫描再回收。MajorGC 会产生内存碎片，为了减  少内存损耗，我们一般需要进行合并或者标记出来方便下次直接分配。当老年代也满了装不下的  时候，就会抛出 OOM（Out of Memory）异常。</p>
+<h2 id="2-3-方法区"><a href="#2-3-方法区" class="headerlink" title="2.3 方法区"></a>2.3 方法区</h2><p>方法区（Method Area）与 Java 堆一样，是所有线程共享的内存区域,用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等,虽然 Java 虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫 Non-Heap（非堆），目的应该是与 Java 堆区分开。</p>
+<p>运行时常量池（Runtime Constant Pool）是方法区的一部分。Class 文件中除了有类的版本/字段/方法/接口等描述信息外，还有一项信息是常量池（Constant Pool Table），用于存放编译期生成的各种字面量和符号引用，这部分内容将类在加载后进入方法区的运行时常量池中存放。运行期间也可能将新的常量放入池中，这种特性被开发人员利用得比较多的是 String.intern()方法。受方法区内存的限制，当常量池无法再申请到内存时会抛出 OutOfMemoryError 异常。</p>
+<h3 id="2-3-1-永久代"><a href="#2-3-1-永久代" class="headerlink" title="2.3.1 永久代"></a>2.3.1 永久代</h3><p>jdk1.6及之前方法区 是由永久代来实现的，以至于这个时期说方法区就是指永久代，永久代，运行时常量池（包括字符串常量池），静态变量存放在永久代上</p>
+<p>jdk1.7 时期方法区在HotSpot中由永久代（类型信息、字段、方法、常量）和堆（字符串常量池、静态变量）共同实现</p>
+<p><strong>永久代(Permanent Generation)</strong>, 用于存储被 JVM 加载的类信息、常量、静  态变量、即时编译器编译后的代码等数据，HotSpot VM把GC分代收集扩展至方法区, 即使用Java  堆的永久代来实现方法区。</p>
+<ul>
+<li><p>在 Java6 版本中，永久代在非堆内存区，静态变量存放在永久代上；</p>
+</li>
+<li><p>到了 Java7 版本，永久代的静态变量和运行时常量池被合并到了堆中，类型信息、字段、方法、常量则继续留在永久代；</p>
+</li>
+<li><p>而到了 Java8，永久代（方法区）被元空间取代了。 具体描述在下一节</p>
+<h3 id="2-3-2-元空间"><a href="#2-3-2-元空间" class="headerlink" title="2.3.2 元空间"></a>2.3.2 元空间</h3><p>jdk1.8及之后，取消永久代，类型信息、字段、方法、常量保存在本地内存的元空间，但字符串常量池、静态变量仍在堆中</p>
+</li>
+</ul>
+<p><strong>why?</strong><br>为永久代设置空间大小是很难确定的,且对永久代进行调优较困难</p>
+<p>在某些场景下，如果动态加载类过多，容易产生 Perm 区的 OOM。如果某个实际 Web 工程中，因为功能点比较多，在运行过程中，要不断动态加载很多类，经常出现 OOM。而元空间和永久代最大的区别在于，元空间不在虚拟机中，而是使用本地内存，所以默认情况下，元空间的大小仅受本地内存限制</p>
+<h1 id="3-线程私有空间"><a href="#3-线程私有空间" class="headerlink" title="3.线程私有空间"></a>3.线程私有空间</h1><h2 id="3-1-程序计数器"><a href="#3-1-程序计数器" class="headerlink" title="3.1 程序计数器"></a>3.1 程序计数器</h2><p>存储指向下一条指令的地址，即将要执行的指令代码。</p>
+<p>多线程在一个特定的时间段内只会执行其中某一个线程方法，CPU会不停的做任务切换，这样必然会导致经常中断或恢复。为了能够准确的记录各个线程正在执行的当前字节码指令地址，所以为每个线程都分配了一个PC寄存器，每个线程都独立计算，不会互相影响。</p>
+<p>它是唯一一个在 JVM 规范中没有规定任何 OutOfMemoryError 情况的区域（因为太简单了</p>
+<h2 id="3-2-虚拟机栈"><a href="#3-2-虚拟机栈" class="headerlink" title="3.2 虚拟机栈"></a>3.2 虚拟机栈</h2><p>是描述java方法执行的内存模型，每个方法在执行的同时都会创建一个栈帧（Stack Frame）  用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用直至执行完成  的过程，就对应着一个栈帧在虚拟机栈中入栈到出栈的过程。</p>
+<p>栈帧（ Frame）是用来存储数据和部分过程结果的数据结构，同时也被用来处理动态链接  (Dynamic Linking)、 方法返回值和异常分派（ Dispatch Exception）。</p>
+<p>栈帧随着方法调用而创建，随着方法结束而销毁——无论方法是正常完成还是异常完成（抛出了在方法内未被捕获的异  常）都算作方法结束<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pS6Orfe"><img src="https://s1.ax1x.com/2023/02/05/pS6Orfe.png" alt="pS6Orfe.png"></a></p>
+<h2 id="3-3-本地方法区"><a href="#3-3-本地方法区" class="headerlink" title="3.3 本地方法区"></a>3.3 本地方法区</h2><p>本地方法栈则为  Native 方法服务，就是执行C语言代码的栈（因为JVM底层依赖C实现）</p>
+<h1 id="4-JVM-总详细内存图"><a href="#4-JVM-总详细内存图" class="headerlink" title="4. JVM 总详细内存图"></a>4. JVM 总详细内存图</h1><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pS6O6ld"><img src="https://s1.ax1x.com/2023/02/05/pS6O6ld.png" alt="pS6O6ld.png"></a></p>
+<h1 id="PS-参考"><a href="#PS-参考" class="headerlink" title="PS.参考"></a>PS.参考</h1><ol>
+<li><p><a class="link"   target="_blank" rel="noopener" href="https://learn.lianglianglee.com/%E4%B8%93%E6%A0%8F/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/20%20%20%E7%A3%A8%E5%88%80%E4%B8%8D%E8%AF%AF%E7%A0%8D%E6%9F%B4%E5%B7%A5%EF%BC%9A%E6%AC%B2%E7%9F%A5JVM%E8%B0%83%E4%BC%98%E5%85%88%E4%BA%86%E8%A7%A3JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.md" >磨刀不误砍柴工：欲知JVM调优先了解JVM内存模型.md<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/Snailclimb/JavaGuide/blob/main/docs/java/jvm/memory-area.md" >Java 内存区域详解
+<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p><a class="link"   target="_blank" rel="noopener" href="https://pdai.tech/md/java/jvm/java-jvm-struct.html#%E4%BA%8C%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88" >JVM 基础 - JVM 内存结构<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+</ol>
+
+            </div>
+
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/03/24/2023-meituan-intern/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">2023_meituan_intern</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/01/24/io-multiplexing-select-poll-epoll/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">IO多路复用中的select poll和epoll</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2020</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Fzquantum</a>
+            
+        </div>
+        
+        <div class="theme-info info-item">
+            <a target="_blank" href="https://hexo.io">Hexo</a> 框架&nbsp;|&nbsp;主題&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜尋..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/post-helper.js"></script>
+
+        
+        
+    
+</div>
+
+
+
+</body>
+</html>
