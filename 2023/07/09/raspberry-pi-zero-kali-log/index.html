@@ -9,7 +9,7 @@
     
     <title>
         
-            欢迎使用teamspeak3 |
+            树莓派ZeroW 安装kali折腾记录 |
         
         Fzquantum-Archives
     </title>
@@ -184,7 +184,7 @@
         <div class="article-content-container">
 
             <div class="article-title">
-                <span class="title-hover-animation">欢迎使用teamspeak3</span>
+                <span class="title-hover-animation">树莓派ZeroW 安装kali折腾记录</span>
             </div>
 
             
@@ -206,16 +206,27 @@
         
             <i class="fa-regular fa-calendar-plus"></i>&nbsp;
         
-        <span class="pc">2021-10-19 22:43:32</span>
-        <span class="mobile">2021-10-19 22:43</span>
+        <span class="pc">2023-07-09 19:15:16</span>
+        <span class="mobile">2023-07-09 19:15</span>
     </span>
     
         <span class="article-update-date article-meta-item">
         <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-24 21:06:58</span>
+        <span class="pc">2023-07-09 20:21:16</span>
     </span>
     
     
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
@@ -232,85 +243,85 @@
             <div class="article-content keep-markdown-body">
                 
 
-                <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+                <h1 id="0-序言"><a href="#0-序言" class="headerlink" title="0. 序言"></a>0. 序言</h1><p>最近不经意间看到树莓派降价的新闻<a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EV4y127RK/?spm_id_from=333.788.recommend_more_video.-1" >两年了！！！树莓派6月价格骨折！眼看它起高楼，眼看它楼塌了
+<i class="fas fa-external-link-alt"></i></a>，tb上450就能搞到一块8G的4B，但是最近经济紧缩政策之下，规划400预算也不是一件容易的事情，而且宿舍里有一个还算稳定的X86软路由，对树莓派也就是简简单单用kali抓个包（觉得单独买一块监听网卡不值得），碰巧又看到了b站上折腾bad usb 项目：<a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18t41187Me/?spm_id_from=333.337.search-card.all.click&vd_source=8601a554ebfb85ec7d63c911be9de2b3" >P4wnP1_ALOA
+<i class="fas fa-external-link-alt"></i></a><br>的项目,由此发现了树莓派Zero W，这玩意虽然性能不好，但是只要145r，还有树莓派的核心竞争力-社区支持，于是火速下单搞了一块，顺带东哥家买了32G的内存卡&amp;读卡器。</p>
+<h1 id="1-系统刷写"><a href="#1-系统刷写" class="headerlink" title="1. 系统刷写"></a>1. 系统刷写</h1><p>因为WSL这么折腾都读不到读卡器的缘故，又不想装一个物理机，索性直接用 <a class="link"   target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/" >Raspberry Pi Imager<i class="fas fa-external-link-alt"></i></a> 刷写SD卡了之，这玩意还能下各种镜像，感觉还行。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pC2ZYLt"><img src="https://s1.ax1x.com/2023/07/09/pC2ZYLt.png" alt="pC2ZYLt.png"></a></p>
+<p>其实更推荐的方式不是刷入kali官方镜像，而是直接去刷P4wnP1_ALOA的镜像：</p>
+<ul>
+<li>项目地址 <a class="link"   target="_blank" rel="noopener" href="https://github.com/RoganDawes/P4wnP1_aloa" >https://github.com/RoganDawes/P4wnP1_aloa<i class="fas fa-external-link-alt"></i></a></li>
+<li>镜像下载 <a class="link"   target="_blank" rel="noopener" href="https://github.com/RoganDawes/P4wnP1_aloa/releases/tag/v0.1.1-beta" >https://github.com/RoganDawes/P4wnP1_aloa/releases/tag/v0.1.1-beta<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>因为其中自带kali，而刷官方镜像还需要去装P4wnP1_ALOA，很麻烦的</p>
+<h1 id="2-启动前配置"><a href="#2-启动前配置" class="headerlink" title="2.启动前配置"></a>2.启动前配置</h1><p>这里给两种配网方式：通过wifi连接树莓派和通过usb连接树莓派，（都是基于SSH）</p>
+<h2 id="2-1-wi-fi配置"><a href="#2-1-wi-fi配置" class="headerlink" title="2.1 wi-fi配置"></a>2.1 wi-fi配置</h2><p>参考：<a class="link"   target="_blank" rel="noopener" href="https://www.hkepc.com/forum/viewthread.php?fid=334&tid=2656777&page=1" >[教學] Raspberry Pi Zero W 如何 headless 安裝 Kali Linux
+<i class="fas fa-external-link-alt"></i></a></p>
+<p>用 Notepad 打開 SD Card 上 wpa_supplicant.conf，填入你的接入wifi的信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">network=&#123;</span><br><span class="line">        ssid=&quot;homenet&quot;</span><br><span class="line">        psk=68002fbdacc8812f89c06a2fb6542b2b1126853983a59e0076e5f56df9c5543b</span><br><span class="line">        id_str=&quot;home&quot;</span><br><span class="line">        priority=2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<head>
+<p>在WSL等Linux环境中执行wpa_passphrase，计算出接入wifi的psk</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpa_passphrase &quot;My-Wifi-SSID&quot; &quot;My-Password&quot;</span><br></pre></td></tr></table></figure>
 
-<title>TeamSpeak 3 Server Invitation</title>
+<p>example：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xrervip@F-pc:/mnt/c/Users/fzquantum$ wpa_passphrase <span class="string">&quot;Mi 10S&quot;</span> <span class="string">&quot;66666666&quot;</span></span><br><span class="line">network=&#123;</span><br><span class="line">        ssid=<span class="string">&quot;Mi 10S&quot;</span></span><br><span class="line">        <span class="comment">#psk=&quot;66666666&quot;</span></span><br><span class="line">        psk=912a419249f483a6a5aff81211b462d6938ea03c85babfc06b393b53c6c0175a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>记得补充 <code> id_str=&quot;home&quot;</code> 字段<br>然后写入 sd卡boot分区  wpa_supplicant.conf 文件中</p>
+<p>除此之外，notepad打开boot根目录下的 interfaces 文件，给该接入点配置上DHCP ，不然可能就分配不了IP地址进而无法连接了。</p>
+<h2 id="2-2-usb网络配置"><a href="#2-2-usb网络配置" class="headerlink" title="2.2 usb网络配置"></a>2.2 usb网络配置</h2><h2 id="2-3-后续配置"><a href="#2-3-后续配置" class="headerlink" title="2.3 后续配置"></a>2.3 后续配置</h2><p>都是一些优化选项，不配置也行，个人感觉最有用的是<code>avahi-daemon.service</code>,这个可以让你通过域名<code>hostname + &quot;.local&quot;</code>而不是ip的方式直接访问你的树莓派</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line"># configure timezone and locales for terminal access.</span><br><span class="line">sudo dpkg-reconfigure tzdata</span><br><span class="line">sudo dpkg-reconfigure locales</span><br><span class="line"># use raspi-config to change the boot option to console mode so as to save memory usage to avoid GUI on boot up.</span><br><span class="line"># and change hostname as required</span><br><span class="line">sudo raspi-config</span><br><span class="line"># start mDNS so that you can use hostname + &quot;.local&quot; instead of IP address</span><br><span class="line">sudo systemctl enable avahi-daemon.service</span><br><span class="line">sudo systemctl start avahi-daemon.service</span><br></pre></td></tr></table></figure>
 
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="pragma" content="no-cache" />
-<meta http-equiv="expires" content="-1" />
-<meta http-equiv="refresh" content="5; url=ts3server://121.89.218.85" />
+<h1 id="3-开始捕猎"><a href="#3-开始捕猎" class="headerlink" title="3.开始捕猎"></a>3.开始捕猎</h1><h2 id="3-1-创建监听接口wlan0mon"><a href="#3-1-创建监听接口wlan0mon" class="headerlink" title="3.1 创建监听接口wlan0mon"></a>3.1 创建监听接口wlan0mon</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0mon &amp;&amp; airmon-ng check <span class="built_in">kill</span></span><br></pre></td></tr></table></figure>
 
-<meta name="robots" content="noindex, nofollow" />
-<meta name="resource-type" content="Document" />
+<p>执行<code>airmon-ng check kill</code>会关闭很多服务，例如之前配的域名解析<code>avahi-daemon.service</code>，导致需要去翻ip地址；但是同时也会关闭现有的wi-fi连接 ，减少抓包的时候的干扰,不想这么做的话，可以执行下面的命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0mon</span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="http://invite.teamspeak.com/css/style.css" type="text/css" />
-<link rel="shortcut icon" href="http://invite.teamspeak.com/favicon.ico" type="image/x-icon" />
+<h2 id="3-2-采集流量"><a href="#3-2-采集流量" class="headerlink" title="3.2 采集流量"></a>3.2 采集流量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng wlan0mon</span><br></pre></td></tr></table></figure>
 
-</head>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pC2efBt"><img src="https://s1.ax1x.com/2023/07/09/pC2efBt.png" alt="pC2efBt.png"></a></p>
+<h2 id="3-3-选择目标，抓取握手包"><a href="#3-3-选择目标，抓取握手包" class="headerlink" title="3.3 选择目标，抓取握手包"></a>3.3 选择目标，抓取握手包</h2><p>以抓取98:97:CC:61:40:??为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng wlan0mon --bssid 98:97:CC:61:40:?? -c 11 -w /root/218 </span><br></pre></td></tr></table></figure>
 
-<body>
+<p>参数：</p>
+<ul>
+<li>bssid 抓取对象的ssid</li>
+<li>c 信道 注意信道要选择正确的</li>
+<li>w 输出抓包文件的地址</li>
+</ul>
+<p>为了更快的抓到握手包，对其进行掉线攻击，设备重连后我们便可以抓到WPA握手包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng wlan0mon -0 0 -a 98:97:CC:61:40:?? </span><br></pre></td></tr></table></figure>
 
-<div align="center" style="width: 800px; margin: 0px auto;">
-
-<br />
-
-<img src="http://invite.teamspeak.com/img/TS_Inline_BlueBlack_RGB.png" alt="" />
-
-
-<h2>You have been invited to this TeamSpeak 3 Server:</h2>
-
-<h1>
-    <a class="link"   href="ts3server://121.89.218.85" >
-    121.89.218.85:9987      <i class="fas fa-external-link-alt"></i></a>
-</h1>
-
-<p><span class="small"><b>URL:</b> ts3server://121.89.218.85</span></p>
-<br />
-<br />
-
-<p>If TeamSpeak 3 is installed on your computer, you are now being redirected to the server.<br /><br>If you are not automatically redirected within 5 seconds, please click <a class="link"   href="ts3server://121.89.218.85" >HERE<i class="fas fa-external-link-alt"></i></a> instead.</p>
-</div>
-
-</body>
-
-</html>
+<p>参数：</p>
+<ul>
+<li>-0 攻击方式</li>
+<li>-a 攻击目标的ssid</li>
+</ul>
+<p>更精准的攻击方式是附带上客户端的mac地址 用参数 <code>-c</code> 附加</p>
+<h1 id="4-P4wnP1-ALOA"><a href="#4-P4wnP1-ALOA" class="headerlink" title="4. P4wnP1_ALOA"></a>4. P4wnP1_ALOA</h1><p>todo</p>
 
             </div>
 
             
 
             
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">#树莓派</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
 
             
                 <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2022/01/04/sparse-matrix-compress/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">稀疏矩阵压缩研究</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                            </a>
-                        </div>
                     
                     
                         <div class="article-next">
                             <a class="next"
                                rel="next"
-                               href="/2021/10/02/powershellDownload/"
+                               href="/2023/06/30/Some-point-of-view-on-OS/"
                             >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">使用PowerShell下载文件</span>
+                                <span class="post-nav-title-item">6月随记 计算机工程方向可以研究的几个点</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                                 <span class="right arrow-icon flex-center">
