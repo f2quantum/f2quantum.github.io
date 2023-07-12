@@ -1,256 +1,548 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html>
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
+  <title>红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法 | fzquantum‘s 解算主楼</title>
+  <meta name="keywords" content=" 折腾 ">
+  <meta name="description" content="红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法 | fzquantum‘s 解算主楼">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Fzquantum">
-    
-    <title>
-        
-            红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法 |
-        
-        Fzquantum-Archives
-    </title>
-    
-<link rel="stylesheet" href="/css/style.css">
+<meta name="description" content="About me关于我A Fzquantum PROJECT    🔭 I’m currently working on 🐦Cainiao-Alibaba Group, China (Java CRUD Engineer Intern but GDBL P4 ) 🌱 I’m currently learning J2EE ,DataBase ,C++, Go ,Distributed Sys">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://f2quantum.github.io/about/index.html">
+<meta property="og:site_name" content="fzquantum‘s 解算主楼">
+<meta property="og:description" content="About me关于我A Fzquantum PROJECT    🔭 I’m currently working on 🐦Cainiao-Alibaba Group, China (Java CRUD Engineer Intern but GDBL P4 ) 🌱 I’m currently learning J2EE ,DataBase ,C++, Go ,Distributed Sys">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/08/02/fCPxcn.md.jpg">
+<meta property="article:published_time" content="2021-08-02T11:49:58.000Z">
+<meta property="article:modified_time" content="2023-07-12T12:40:18.138Z">
+<meta property="article:author" content="fzquantum">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/08/02/fCPxcn.md.jpg">
 
-    <link rel="shortcut icon" href="/images/bitbug_favicon_48.ico">
-    
-<link rel="stylesheet" href="/font/css/fontawesome.min.css">
 
-    
-<link rel="stylesheet" href="/font/css/regular.min.css">
+<link rel="icon" href="/img/avatar.jpg">
 
-    
-<link rel="stylesheet" href="/font/css/solid.min.css">
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-    
-<link rel="stylesheet" href="/font/css/brands.min.css">
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
 
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"f2quantum.github.io","root":"/","language":"zh-cn","path":"search.json"}
-    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/bitbug_favicon_48.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":false,"style":"default"},"code_block":{},"side_tools":{},"pjax":{"enable":false},"lazyload":{"enable":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"placeholder":null},"gitalk":{"github_id":null,"repository":null,"client_id":null,"client_secret":null},"twikoo":{"env_id":null,"region":null}},"post":{"word_count":{"enable":false,"wordcount":false,"min2read":false},"author_label":{"enable":true,"auto":true,"custom_label_list":["Trainee","Engineer","Architect","CTO","BOSS"]}},"version":"3.6.1"}
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
-    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
-    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original article title","author":"Original article author","link":"Original article link"}
-  </script>
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
 
 
 <body>
-<div class="progress-bar-container">
-    
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>fzquantum</span>
+</div>
 
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/f2quantum"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
     
 </div>
 
 
-<main class="page-container">
 
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(26)</small>
+            
+        </div>
+    </li>
     
-
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
             
-<header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
             
-                <a class="logo-image" href="/">
-                    <img src="/images/bitbug_favicon_48.ico">
-                </a>
-            
-            <a class="logo-title" href="/">
-               Fzquantum-Archives
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
-                                TAGS
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/links"
-                            >
-                                LINKS
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
-                                ABOUT
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
     </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="26">
 
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
             
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags">TAGS</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/links">LINKS</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about">ABOUT</a>
-                </li>
+            <li><a target="_blank" href="https://cccccent.github.io/">崔大师</a></li>
             
         </ul>
     </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
         </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
 
-        <div class="page-main-content-middle">
-
-            <div class="main-content">
-
-                
-                    <div class="fade-in-down-animation">
-    <div class="post-page-container">
-        <div class="article-content-container">
-
-            <div class="article-title">
-                <span class="title-hover-animation">红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法</span>
-            </div>
-
-            
-                <div class="article-header">
-                    <div class="avatar">
-                        <img src="/images/avatar.svg">
-                    </div>
-                    <div class="info">
-                        <div class="author">
-                            <span class="name">Fzquantum</span>
-                            
-                                <span class="author-label">Lv3</span>
-                            
-                        </div>
-                        <div class="meta-info">
-                            
-<div class="article-meta-info">
-    <span class="article-date article-meta-item">
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
         
-            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式系统</a>
+            </li>
         
-        <span class="pc">2022-07-03 15:23:45</span>
-        <span class="mobile">2022-07-03 15:23</span>
-    </span>
-    
-        <span class="article-update-date article-meta-item">
-        <i class="fas fa-file-pen"></i>&nbsp;
-        <span class="pc">2023-03-24 21:06:58</span>
-    </span>
-    
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/%E6%90%9E%E6%9C%BA/">搞机</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>工具</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端开发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>脚本小子</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>开发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面经</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>评鉴</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>树莓派</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>通用开发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>月时记</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>折腾</a>
+            </li>
+        
+    </div>
 
-    
-    
-    
-    
 </div>
 
-                        </div>
-                    </div>
-                </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="All "
+           href="/2023/07/09/raspberry-pi-zero-kali-log/"
+           data-tag="树莓派"
+           data-author="" >
+            <span class="post-title" title="树莓派ZeroW 安装kali折腾记录">树莓派ZeroW 安装kali折腾记录</span>
+            <span class="post-date" title="2023-07-09 19:15:16">2023/07/09</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2023/06/30/Some-point-of-view-on-OS/"
+           data-tag="月时记"
+           data-author="" >
+            <span class="post-title" title="6月随记 计算机工程方向可以研究的几个点">6月随记 计算机工程方向可以研究的几个点</span>
+            <span class="post-date" title="2023-06-30 16:20:53">2023/06/30</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2023/06/28/big-data-is-dead/"
+           data-tag="分布式系统"
+           data-author="" >
+            <span class="post-title" title="大数据已死">大数据已死</span>
+            <span class="post-date" title="2023-06-28 17:23:07">2023/06/28</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2023/05/08/influxDB-project-struct/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="influxdb源码阅读 -- 项目结构">influxdb源码阅读 -- 项目结构</span>
+            <span class="post-date" title="2023-05-08 22:36:45">2023/05/08</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2023/03/24/2023-meituan-intern/"
+           data-tag="面经"
+           data-author="" >
+            <span class="post-title" title="美团24暑期实习面经">美团24暑期实习面经</span>
+            <span class="post-date" title="2023-03-24 21:30:13">2023/03/24</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2023/02/05/jvm-memory-model/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="图解 Java 内存模型">图解 Java 内存模型</span>
+            <span class="post-date" title="2023-02-05 16:29:21">2023/02/05</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2023/01/24/io-multiplexing-select-poll-epoll/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="IO多路复用中的select poll和epoll">IO多路复用中的select poll和epoll</span>
+            <span class="post-date" title="2023-01-24 22:14:06">2023/01/24</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2023/01/24/unix-io-java-impl/"
+           data-tag="开发"
+           data-author="" >
+            <span class="post-title" title="Java IO 模型笔记">Java IO 模型笔记</span>
+            <span class="post-date" title="2023-01-24 12:35:17">2023/01/24</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2022/07/12/EaCRS/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="EaCRS:一种基于可扩展阵列的多维数据压缩方案">EaCRS:一种基于可扩展阵列的多维数据压缩方案</span>
+            <span class="post-date" title="2022-07-12 18:35:22">2022/07/12</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2022/07/03/redmi2linux/"
+           data-tag="折腾"
+           data-author="" >
+            <span class="post-title" title="红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法">红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法</span>
+            <span class="post-date" title="2022-07-03 15:23:45">2022/07/03</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2022/02/13/AmongUs20210630/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="AmongUs私服游玩指南">AmongUs私服游玩指南</span>
+            <span class="post-date" title="2022-02-13 20:15:24">2022/02/13</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2022/01/15/Multidimensional-Sparse-Array/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="多维稀疏矩阵行储存压缩研究">多维稀疏矩阵行储存压缩研究</span>
+            <span class="post-date" title="2022-01-15 21:46:55">2022/01/15</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2022/01/10/my-game-of-the-year/"
+           data-tag="评鉴"
+           data-author="" >
+            <span class="post-title" title="个人年度游戏评价总结">个人年度游戏评价总结</span>
+            <span class="post-date" title="2022-01-10 19:17:15">2022/01/10</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2022/01/04/sparse-matrix-compress/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="稀疏矩阵压缩研究">稀疏矩阵压缩研究</span>
+            <span class="post-date" title="2022-01-04 17:21:10">2022/01/04</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/10/19/invitToTeamspeak3/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="欢迎使用teamspeak3">欢迎使用teamspeak3</span>
+            <span class="post-date" title="2021-10-19 22:43:32">2021/10/19</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/10/02/powershellDownload/"
+           data-tag="脚本小子"
+           data-author="" >
+            <span class="post-title" title="使用PowerShell下载文件">使用PowerShell下载文件</span>
+            <span class="post-date" title="2021-10-02 00:53:00">2021/10/02</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/09/01/Database-transaction-processing-technology-failure-recovery/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="数据库事务处理技术-故障恢复">数据库事务处理技术-故障恢复</span>
+            <span class="post-date" title="2021-09-01 14:39:44">2021/09/01</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/30/Database-transaction-processing-techniques/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="数据库事务处理技术">数据库事务处理技术</span>
+            <span class="post-date" title="2021-08-30 20:57:49">2021/08/30</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/28/4399download/"
+           data-tag="脚本小子"
+           data-author="" >
+            <span class="post-title" title="下载 4399 FLASH 游戏">下载 4399 FLASH 游戏</span>
+            <span class="post-date" title="2021-08-28 19:53:39">2021/08/28</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/24/Serializable/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="通俗地解释脏读、不可重复读、幻读">通俗地解释脏读、不可重复读、幻读</span>
+            <span class="post-date" title="2021-08-24 10:45:43">2021/08/24</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/21/JavaBooks/"
+           data-tag="后端开发"
+           data-author="" >
+            <span class="post-title" title="Java 程序员常读书单整理">Java 程序员常读书单整理</span>
+            <span class="post-date" title="2021-08-21 13:13:30">2021/08/21</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/09/PythonHttpAPI/"
+           data-tag="脚本小子"
+           data-author="" >
+            <span class="post-title" title="Python 调用 HTTP API 接口模板">Python 调用 HTTP API 接口模板</span>
+            <span class="post-date" title="2021-08-09 20:55:53">2021/08/09</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/06/chinese-copywriting-guidelines/"
+           data-tag="通用开发"
+           data-author="" >
+            <span class="post-title" title="中文文案排版指北">中文文案排版指北</span>
+            <span class="post-date" title="2021-08-06 18:01:45">2021/08/06</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/06/AlibabaCodeFormat/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="阿里巴巴编码规范（Java）">阿里巴巴编码规范（Java）</span>
+            <span class="post-date" title="2021-08-06 17:18:32">2021/08/06</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/03/TeamSpeak%E5%BF%AB%E9%80%9F%E5%B8%AE%E5%8A%A9/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="TeamSpeak快速帮助">TeamSpeak快速帮助</span>
+            <span class="post-date" title="2021-08-03 22:27:50">2021/08/03</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2021/08/02/teamspeak3/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="teamspeak3">teamspeak3</span>
+            <span class="post-date" title="2021-08-02 14:36:48">2021/08/02</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-redmi2linux" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
             
-
-            <div class="article-content keep-markdown-body">
-                
-
-                <p>本来笔者想买一个Armbian的斐讯N1盒子来运行一些docker容器，但是突然想到有一部闲置的红米2，于是乎便寻找方法看看能否将其刷入Linux解锁更多玩法。</p>
+            <a class="color3">折腾</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2023-07-12 20:40:18'>2022-07-03 15:23</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%B7%E6%9C%BA"><span class="toc-text">刷机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%BF%9B%E5%85%A5fastboot%E6%A8%A1%E5%BC%8F"><span class="toc-text">1.进入fastboot模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%B7%E5%85%A5postmarketOS%E7%B3%BB%E7%BB%9F"><span class="toc-text">2. 刷入postmarketOS系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%88%B7%E5%85%A5%E4%BA%86%E6%9C%80%E6%96%B0%E5%9B%BA%E4%BB%B6"><span class="toc-text">2.1 检查是否刷入了最新固件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%AE%89%E8%A3%85lk2nd%E4%BD%9C%E4%B8%BA2nd-bootloader"><span class="toc-text">2.2 安装lk2nd作为2nd bootloader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E5%88%B7%E5%85%A5-postmarketOS"><span class="toc-text">2.3 刷入 postmarketOS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="toc-text">安装软件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A7%A3%E9%94%81%E6%89%8B%E6%9C%BA%E8%BF%9B%E5%85%A5%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2"><span class="toc-text">1.解锁手机进入图形界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%BC%80%E5%90%AFSSH-Server"><span class="toc-text">2.开启SSH Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8apk"><span class="toc-text">3. 包管理器apk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85Bash%E5%B9%B6%E8%AE%BE%E4%B8%BA%E9%BB%98%E8%AE%A4%E7%BB%88%E7%AB%AF"><span class="toc-text">4.安装Bash并设为默认终端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AE%89%E8%A3%85Nano%E4%BD%9C%E4%B8%BA%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-text">5. 安装Nano作为编辑器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AE%89%E8%A3%85docker"><span class="toc-text">6.安装docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E5%AE%9A%E6%97%B6%E8%AE%A1%E5%88%92%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1-cron"><span class="toc-text">开启定时计划运行服务 cron</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E4%BC%98%E5%8C%96"><span class="toc-text">可选优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%81%9C%E7%94%A8GUI%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">1. 停用GUI（可选）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%81%9C%E7%94%A8modemmanager%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">2. 停用modemmanager（可选）</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本来笔者想买一个Armbian的斐讯N1盒子来运行一些docker容器，但是突然想到有一部闲置的红米2，于是乎便寻找方法看看能否将其刷入Linux解锁更多玩法。</p>
 <p>红米2增强版拥有2G RAM和 16G ROM 和晓龙410处理器，作为手机早已过时，但是作为一台ARM服务器则绰绰有余。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/j87E0f"><img src="https://s1.ax1x.com/2022/07/03/j87E0f.png" alt="j87E0f.png"></a></p>
 <h1 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h1><h2 id="1-进入fastboot模式"><a href="#1-进入fastboot模式" class="headerlink" title="1.进入fastboot模式"></a>1.进入fastboot模式</h2><p>关机情况下，电源键+音量减进入fastboot模式，因为红米2 发行的年代尚且不流行BL锁，所以无需考虑解锁问题。</p>
 <h2 id="2-刷入postmarketOS系统"><a href="#2-刷入postmarketOS系统" class="headerlink" title="2. 刷入postmarketOS系统"></a>2. 刷入postmarketOS系统</h2><h3 id="2-1-检查是否刷入了最新固件"><a href="#2-1-检查是否刷入了最新固件" class="headerlink" title="2.1 检查是否刷入了最新固件"></a>2.1 检查是否刷入了最新固件</h3><ul>
 <li>使用了安卓版本为5以上的MIUI<strong>可以跳过此步骤</strong></li>
-<li>使用了安卓版本为4的的MIUI请更新固件,(不过更简单的方式是线刷一个安卓5的MIUI)<a class="link"   target="_blank" rel="noopener" href="https://xiaomirom.com/download/redmi-2-redmi-2-pro-wt86047-stable-V9.2.3.0.LHJCNEK/#china-fastboot" >下载红米 2/2A (wt86047) 稳定版刷机包 MIUI9<i class="fas fa-external-link-alt"></i></a></li>
+<li>使用了安卓版本为4的的MIUI请更新固件,(不过更简单的方式是线刷一个安卓5的MIUI)<a target="_blank" rel="noopener" href="https://xiaomirom.com/download/redmi-2-redmi-2-pro-wt86047-stable-V9.2.3.0.LHJCNEK/#china-fastboot">下载红米 2/2A (wt86047) 稳定版刷机包 MIUI9</a></li>
 </ul>
-<p>固件下载地址：<a class="link"   target="_blank" rel="noopener" href="https://www.androidfilehost.com/?w=files&flid=303434" >https://www.androidfilehost.com/?w=files&amp;flid=303434<i class="fas fa-external-link-alt"></i></a></p>
+<p>固件下载地址：<a target="_blank" rel="noopener" href="https://www.androidfilehost.com/?w=files&flid=303434">https://www.androidfilehost.com/?w=files&amp;flid=303434</a></p>
 <p>红米2有增强&amp;标配区分，小米给红米2挺多个设备名</p>
 <p>标配(官方4.4) 2014811、2014812…(太多不列出来了，一般201481x对于刷第三方来说没特殊区分)</p>
 <p>增强(官方5.1) wt86047(移动)、wt88047(联通&amp;电信)</p>
@@ -265,14 +557,14 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb sideload firmware.zip</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-2-安装lk2nd作为2nd-bootloader"><a href="#2-2-安装lk2nd作为2nd-bootloader" class="headerlink" title="2.2 安装lk2nd作为2nd bootloader"></a>2.2 安装lk2nd作为2nd bootloader</h2><p>虽然小米已经给我们提供了一个默认的bootloader，但是还需要在原有基础上额外安装一个自定义的bootloader 来给运行linux环境提供更多硬件支持，因此需要安装lk2nd</p>
-<p>Github项目地址：<a class="link"   target="_blank" rel="noopener" href="https://github.com/msm8916-mainline/lk2nd#readme" >lk2nd<i class="fas fa-external-link-alt"></i></a>，请在github的release页面里下载<code>lk2nd-msm8916.img</code> 文件（<a class="link"   target="_blank" rel="noopener" href="http://120.53.249.36:3080/Share/%E7%BA%A2%E7%B1%B32_pmos/lk2nd-msm8916.img" >k2nd-msm8916.img<i class="fas fa-external-link-alt"></i></a>）</p>
+<p>Github项目地址：<a target="_blank" rel="noopener" href="https://github.com/msm8916-mainline/lk2nd#readme">lk2nd</a>，请在github的release页面里下载<code>lk2nd-msm8916.img</code> 文件（<a target="_blank" rel="noopener" href="http://120.53.249.36:3080/Share/%E7%BA%A2%E7%B1%B32_pmos/lk2nd-msm8916.img">k2nd-msm8916.img</a>）</p>
 <p>建议安装<strong>最新版</strong>lk2nd，因为0.9版本只开放了<strong>单CPU</strong>，而0.11版之后才能开启<strong>全部四核心</strong>。<br>刷入lk2nd指令如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fastboot flash boot lk2nd-msm8916.img</span><br><span class="line">fastboot reboot</span><br></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/j873n0"><img src="https://s1.ax1x.com/2022/07/03/j873n0.png" alt="j873n0.png"></a><br>没问题的话，重启后手机会显示如下的画面：<br>lk2nd的主界面<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/j8I3nK"><img src="https://s1.ax1x.com/2022/07/03/j8I3nK.png" alt="j8I3nK.png"></a></p>
-<h2 id="2-3-刷入-postmarketOS"><a href="#2-3-刷入-postmarketOS" class="headerlink" title="2.3 刷入 postmarketOS"></a>2.3 刷入 postmarketOS</h2><p>固件下载地址：<a class="link"   target="_blank" rel="noopener" href="https://images.postmarketos.org/bpo/v22.06/xiaomi-wt88047/" >https://images.postmarketos.org/bpo/v22.06/xiaomi-wt88047/<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="2-3-刷入-postmarketOS"><a href="#2-3-刷入-postmarketOS" class="headerlink" title="2.3 刷入 postmarketOS"></a>2.3 刷入 postmarketOS</h2><p>固件下载地址：<a target="_blank" rel="noopener" href="https://images.postmarketos.org/bpo/v22.06/xiaomi-wt88047/">https://images.postmarketos.org/bpo/v22.06/xiaomi-wt88047/</a></p>
 <p>这里有三个ROM 随便选一个下载即可，反正最后也使用终端和手机进行交互，GUI不是很重要。</p>
-<p><a class="link"   target="_blank" rel="noopener" href="http://120.53.249.36:3080/Share/%E7%BA%A2%E7%B1%B32_pmos/20220622-2251-postmarketOS-v22.06-phosh-18-xiaomi-wt88047.img" >Phosh_mt88047.img<i class="fas fa-external-link-alt"></i></a><br><a class="link"   target="_blank" rel="noopener" href="http://120.53.249.36:3080/Share/%E7%BA%A2%E7%B1%B32_pmos/20220622-2251-postmarketOS-v22.06-phosh-18-xiaomi-wt88047-boot.img" >Phosh_mt88047_boot.img<i class="fas fa-external-link-alt"></i></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/j8y13D"><img src="https://s1.ax1x.com/2022/07/03/j8y13D.png" alt="j8y13D.png"></a></p>
+<p><a target="_blank" rel="noopener" href="http://120.53.249.36:3080/Share/%E7%BA%A2%E7%B1%B32_pmos/20220622-2251-postmarketOS-v22.06-phosh-18-xiaomi-wt88047.img">Phosh_mt88047.img</a><br><a target="_blank" rel="noopener" href="http://120.53.249.36:3080/Share/%E7%BA%A2%E7%B1%B32_pmos/20220622-2251-postmarketOS-v22.06-phosh-18-xiaomi-wt88047-boot.img">Phosh_mt88047_boot.img</a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/j8y13D"><img src="https://s1.ax1x.com/2022/07/03/j8y13D.png" alt="j8y13D.png"></a></p>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/j86Fat"><img src="https://s1.ax1x.com/2022/07/03/j86Fat.png" alt="j86Fat.png"></a></p>
 <p>三种UI如下图所示：<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/j8RDne"><img src="https://s1.ax1x.com/2022/07/03/j8RDne.png" alt="j8RDne.png"></a></p>
 <p>重启后手机显示lk2nd界面，重新连接到电脑的fastboot，在电脑的命令行中执行如下的fastboot指令刷入ROM</p>
@@ -320,7 +612,7 @@
 <p>初始化之后就可以正常使用了<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/j82zFI"><img src="https://s1.ax1x.com/2022/07/03/j82zFI.png" alt="j82zFI.png"></a></p>
 <h2 id="开启定时计划运行服务-cron"><a href="#开启定时计划运行服务-cron" class="headerlink" title="开启定时计划运行服务 cron"></a>开启定时计划运行服务 cron</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rc-update add crond default</span><br></pre></td></tr></table></figure>
 <h1 id="可选优化"><a href="#可选优化" class="headerlink" title="可选优化"></a>可选优化</h1><h2 id="1-停用GUI（可选）"><a href="#1-停用GUI（可选）" class="headerlink" title="1. 停用GUI（可选）"></a>1. 停用GUI（可选）</h2><p>停用GUI可以节省大量内存，用更多的资源来运行我们的容器等服务。</p>
-<p>根据官网wiki上的介绍<a class="link"   target="_blank" rel="noopener" href="https://wiki.postmarketos.org/wiki/Phosh" >https://wiki.postmarketos.org/wiki/Phosh#Starting_Phosh<i class="fas fa-external-link-alt"></i></a><br>对于我们之前安装的 phosh 镜像，其GNOME图形界面的维持是靠tinydm这个图形界面管理器实现的，因此停用GUI只需要禁用该服务便能停用GUI。</p>
+<p>根据官网wiki上的介绍<a target="_blank" rel="noopener" href="https://wiki.postmarketos.org/wiki/Phosh">https://wiki.postmarketos.org/wiki/Phosh#Starting_Phosh</a><br>对于我们之前安装的 phosh 镜像，其GNOME图形界面的维持是靠tinydm这个图形界面管理器实现的，因此停用GUI只需要禁用该服务便能停用GUI。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rc-update del tinydm</span><br></pre></td></tr></table></figure>
 <p>然后<code>reboot</code>重启即可，大约可以节约出500MB以上的内存空间</p>
 <p>这样开机就不会进入图形界面，卡在loading界面，过一段时间后便自动息屏。</p>
@@ -329,226 +621,159 @@
 
 <h2 id="2-停用modemmanager（可选）"><a href="#2-停用modemmanager（可选）" class="headerlink" title="2. 停用modemmanager（可选）"></a>2. 停用modemmanager（可选）</h2><p> ModemManager用来控制移动宽带（2G/3G/4G）设备和连接，提供统一的高层API接口，类似于NetworkManager进行网络连接的移动宽带设备/连接，说白了就是可以用来管理手机卡,如果不需要插入上网卡做热点机的话，可以考虑将其停用。<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rc-update del modemmanager</span><br></pre></td></tr></table></figure><br>需要恢复只需要运行下面的指令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rc-update add modemmanager default</span><br></pre></td></tr></table></figure>
-            </div>
-
-            
-
-            
-                <ul class="post-tags-box">
-                    
-                        <li class="tag-item">
-                            <a href="/tags/%E6%90%9E%E6%9C%BA/">#搞机</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            
-
-            
-                <div class="article-nav">
-                    
-                        <div class="article-prev">
-                            <a class="prev"
-                               rel="prev"
-                               href="/2022/07/12/EaCRS/"
-                            >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                                <span class="title flex-center">
-                                <span class="post-nav-title-item">EaCRS:一种基于可扩展阵列的多维数据压缩方案</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                            </a>
-                        </div>
-                    
-                    
-                        <div class="article-next">
-                            <a class="next"
-                               rel="next"
-                               href="/2022/02/13/AmongUs20210630/"
-                            >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">AmongUs私服游玩指南</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                                <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                            </a>
-                        </div>
-                    
-                </div>
-            
-
-            
-        </div>
-
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载无需注明来源，放弃所有权利 </span>
     </div>
-</div>
+</article>
 
 
-                
-            </div>
 
-        </div>
 
-        <div class="page-main-content-bottom">
-            
-<footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-                <span>2020</span> -
-            
-            2023
-            
-                &nbsp;<i class="fas fa-heart icon-animate"></i>
-                &nbsp;<a href="/">Fzquantum</a>
-            
-        </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
-        </div>
-        
-        
-    </div>
-</footer>
 
-        </div>
-    </div>
+
 
     
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
 
-        <!-- go comment -->
-        
-    </ul>
-</div>
 
-        </div>
-    
 
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
-</div>
 
     </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    2018-2077 f2quantum
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
-    <div class="zoom-in-image-mask">
-    <img class="zoom-in-image">
-</div>
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
 
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="close-popup-btn">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
     </div>
 </div>
-
-    
-
-</main>
-
-
-
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/main.js"></script>
-
-<script src="/js/header-shrink.js"></script>
-
-<script src="/js/back2top.js"></script>
-
-<script src="/js/dark-light-toggle.js"></script>
-
-
-
-
-
-    
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-<div class="post-scripts">
-    
-        
-<script src="/js/post-helper.js"></script>
-
-        
-        
-    
-</div>
-
-
 
 </body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
 </html>
