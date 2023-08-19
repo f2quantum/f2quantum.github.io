@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>数据库事务处理技术 | Blog 计划</title>
+  <meta name="keywords" content=" 数据库 ">
+  <meta name="description" content="数据库事务处理技术 | Blog 计划">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="About me关于我A Fzquantum PROJECT    🔭 I’m currently working on 🐦Cainiao-Alibaba Group, China (Java CRUD Engineer Intern but GDBL P4 ) 🌱 I’m currently learning J2EE ,DataBase ,C++, Go ,Distributed Sys">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://f2quantum.github.io/about/index.html">
+<meta property="og:site_name" content="Blog 计划">
+<meta property="og:description" content="About me关于我A Fzquantum PROJECT    🔭 I’m currently working on 🐦Cainiao-Alibaba Group, China (Java CRUD Engineer Intern but GDBL P4 ) 🌱 I’m currently learning J2EE ,DataBase ,C++, Go ,Distributed Sys">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/08/02/fCPxcn.md.jpg">
+<meta property="article:published_time" content="2021-08-02T11:49:58.000Z">
+<meta property="article:modified_time" content="2023-07-12T12:40:18.138Z">
+<meta property="article:author" content="fzquantum">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/08/02/fCPxcn.md.jpg">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>fzquantum</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/f2quantum"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(29)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="月时记">
+            
+            月时记
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="后端">
+            
+            后端
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="数据库">
+            
+            数据库
+            <small>(6)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="分布式系统">
+            
+            分布式系统
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="工具">
+            
+            工具
+            <small>(6)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="脚本小子">
+            
+            脚本小子
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="面经">
+            
+            面经
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="通用开发">
+            
+            通用开发
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="杂谈">
+            
+            杂谈
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="折腾">
+            
+            折腾
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="29">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://cccccent.github.io/">崔大师</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式系统</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>工具</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端开发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>脚本小子</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>论文</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面经</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>评鉴</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>通用开发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>月时记</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>折腾</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 杂谈 "
+           href="/2023/08/16/%E6%9D%82%E8%B0%88/how-to-read-paper/"
+           data-tag="论文"
+           data-author="" >
+            <span class="post-title" title="How to Read a Paper (怎样阅读论文)">How to Read a Paper (怎样阅读论文)</span>
+            <span class="post-date" title="2023-08-16 14:32:07">2023/08/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/16/%E5%90%8E%E7%AB%AF/HSF-base-info/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="HSF-base-info">HSF-base-info</span>
+            <span class="post-date" title="2023-08-16 14:03:46">2023/08/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 分布式系统 "
+           href="/2023/07/12/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/mit-6-824-Distributed-System-start/"
+           data-tag="分布式系统"
+           data-author="" >
+            <span class="post-title" title="MIT 6.824 分布式系统">MIT 6.824 分布式系统</span>
+            <span class="post-date" title="2023-07-12 16:52:34">2023/07/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 折腾 "
+           href="/2023/07/09/%E6%8A%98%E8%85%BE/raspberry-pi-zero-kali-log/"
+           data-tag="折腾"
+           data-author="" >
+            <span class="post-title" title="树莓派ZeroW 安装kali折腾记录">树莓派ZeroW 安装kali折腾记录</span>
+            <span class="post-date" title="2023-07-09 19:15:16">2023/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 月时记 "
+           href="/2023/06/30/%E6%9C%88%E6%97%B6%E8%AE%B0/Some-point-of-view-on-OS/"
+           data-tag="月时记"
+           data-author="" >
+            <span class="post-title" title="6月随记 计算机工程方向可以研究的几个点">6月随记 计算机工程方向可以研究的几个点</span>
+            <span class="post-date" title="2023-06-30 16:20:53">2023/06/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 分布式系统 "
+           href="/2023/06/28/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/big-data-is-dead/"
+           data-tag="分布式系统"
+           data-author="" >
+            <span class="post-title" title="大数据已死">大数据已死</span>
+            <span class="post-date" title="2023-06-28 17:23:07">2023/06/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2023/05/08/%E6%95%B0%E6%8D%AE%E5%BA%93/influxDB-project-struct/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="influxdb源码阅读 -- 项目结构">influxdb源码阅读 -- 项目结构</span>
+            <span class="post-date" title="2023-05-08 22:36:45">2023/05/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 面经 "
+           href="/2023/03/24/%E9%9D%A2%E8%AF%95/2023-meituan-intern/"
+           data-tag="面经"
+           data-author="" >
+            <span class="post-title" title="美团24暑期实习面经">美团24暑期实习面经</span>
+            <span class="post-date" title="2023-03-24 21:30:13">2023/03/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/02/05/%E5%90%8E%E7%AB%AF/jvm-memory-model/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="图解 Java 内存模型">图解 Java 内存模型</span>
+            <span class="post-date" title="2023-02-05 16:29:21">2023/02/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/01/24/%E5%90%8E%E7%AB%AF/io-multiplexing-select-poll-epoll/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="IO多路复用中的select poll和epoll">IO多路复用中的select poll和epoll</span>
+            <span class="post-date" title="2023-01-24 22:14:06">2023/01/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/01/24/%E5%90%8E%E7%AB%AF/unix-io-java-impl/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="Java IO 模型笔记">Java IO 模型笔记</span>
+            <span class="post-date" title="2023-01-24 12:35:17">2023/01/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/07/12/%E6%95%B0%E6%8D%AE%E5%BA%93/EaCRS/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="EaCRS:一种基于可扩展阵列的多维数据压缩方案">EaCRS:一种基于可扩展阵列的多维数据压缩方案</span>
+            <span class="post-date" title="2022-07-12 18:35:22">2022/07/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 折腾 "
+           href="/2022/07/03/%E6%8A%98%E8%85%BE/redmi2linux/"
+           data-tag="折腾"
+           data-author="" >
+            <span class="post-title" title="红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法">红米2 安装 postmarketOS(基于 Alpine Linux)及后续玩法</span>
+            <span class="post-date" title="2022-07-03 15:23:45">2022/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 工具 "
+           href="/2022/02/13/%E5%B7%A5%E5%85%B7/AmongUs20210630/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="AmongUs私服游玩指南">AmongUs私服游玩指南</span>
+            <span class="post-date" title="2022-02-13 20:15:24">2022/02/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/01/15/%E6%95%B0%E6%8D%AE%E5%BA%93/Multidimensional-Sparse-Array/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="多维稀疏矩阵行储存压缩研究">多维稀疏矩阵行储存压缩研究</span>
+            <span class="post-date" title="2022-01-15 21:46:55">2022/01/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 杂谈 "
+           href="/2022/01/10/%E6%9D%82%E8%B0%88/my-game-of-the-year/"
+           data-tag="评鉴"
+           data-author="" >
+            <span class="post-title" title="个人年度游戏评价总结">个人年度游戏评价总结</span>
+            <span class="post-date" title="2022-01-10 19:17:15">2022/01/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2022/01/04/%E6%95%B0%E6%8D%AE%E5%BA%93/sparse-matrix-compress/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="稀疏矩阵压缩研究">稀疏矩阵压缩研究</span>
+            <span class="post-date" title="2022-01-04 17:21:10">2022/01/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 工具 "
+           href="/2021/10/19/%E5%B7%A5%E5%85%B7/invitToTeamspeak3/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="欢迎使用teamspeak3">欢迎使用teamspeak3</span>
+            <span class="post-date" title="2021-10-19 22:43:32">2021/10/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 工具 "
+           href="/2021/10/02/%E5%B7%A5%E5%85%B7/powershellDownload/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="使用PowerShell下载文件">使用PowerShell下载文件</span>
+            <span class="post-date" title="2021-10-02 00:53:00">2021/10/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/09/01/%E6%95%B0%E6%8D%AE%E5%BA%93/Database-transaction-processing-technology-failure-recovery/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="数据库事务处理技术-故障恢复">数据库事务处理技术-故障恢复</span>
+            <span class="post-date" title="2021-09-01 14:39:44">2021/09/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2021/08/30/%E6%95%B0%E6%8D%AE%E5%BA%93/Database-transaction-processing-techniques/"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="数据库事务处理技术">数据库事务处理技术</span>
+            <span class="post-date" title="2021-08-30 20:57:49">2021/08/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 脚本小子 "
+           href="/2021/08/28/%E8%84%9A%E6%9C%AC%E5%B0%8F%E5%AD%90/4399download/"
+           data-tag="脚本小子"
+           data-author="" >
+            <span class="post-title" title="下载 4399 FLASH 游戏">下载 4399 FLASH 游戏</span>
+            <span class="post-date" title="2021-08-28 19:53:39">2021/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2021/08/24/%E5%90%8E%E7%AB%AF/Serializable/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="通俗地解释脏读、不可重复读、幻读">通俗地解释脏读、不可重复读、幻读</span>
+            <span class="post-date" title="2021-08-24 10:45:43">2021/08/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2021/08/21/%E5%90%8E%E7%AB%AF/JavaBooks/"
+           data-tag="后端开发"
+           data-author="" >
+            <span class="post-title" title="Java 程序员常读书单整理">Java 程序员常读书单整理</span>
+            <span class="post-date" title="2021-08-21 13:13:30">2021/08/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 工具 "
+           href="/2021/08/09/%E5%B7%A5%E5%85%B7/PythonHttpAPI/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="Python 调用 HTTP API 接口模板">Python 调用 HTTP API 接口模板</span>
+            <span class="post-date" title="2021-08-09 20:55:53">2021/08/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 通用开发 "
+           href="/2021/08/06/%E9%80%9A%E7%94%A8%E5%BC%80%E5%8F%91/chinese-copywriting-guidelines/"
+           data-tag="通用开发"
+           data-author="" >
+            <span class="post-title" title="中文文案排版指北">中文文案排版指北</span>
+            <span class="post-date" title="2021-08-06 18:01:45">2021/08/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2021/08/06/%E5%90%8E%E7%AB%AF/AlibabaCodeFormat/"
+           data-tag="后端"
+           data-author="" >
+            <span class="post-title" title="阿里巴巴编码规范（Java）">阿里巴巴编码规范（Java）</span>
+            <span class="post-date" title="2021-08-06 17:18:32">2021/08/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 工具 "
+           href="/2021/08/03/%E5%B7%A5%E5%85%B7/TeamSpeak%E5%BF%AB%E9%80%9F%E5%B8%AE%E5%8A%A9/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="TeamSpeak快速帮助">TeamSpeak快速帮助</span>
+            <span class="post-date" title="2021-08-03 22:27:50">2021/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 工具 "
+           href="/2021/08/02/%E5%B7%A5%E5%85%B7/teamspeak3/"
+           data-tag="工具"
+           data-author="" >
+            <span class="post-title" title="teamspeak3">teamspeak3</span>
+            <span class="post-date" title="2021-08-02 14:36:48">2021/08/02</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-数据库/Database-transaction-processing-techniques" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">数据库事务处理技术</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="数据库">数据库</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">数据库</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-08-19 12:25:37'>2021-08-30 20:57</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC22%E8%AE%B2-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF"><span class="toc-text"> 第22讲 数据库事务处理技术</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%EF%BC%9F"><span class="toc-text">什么是并发控制？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1"><span class="toc-text">什么是事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84ACID%E7%89%B9%E6%80%A7"><span class="toc-text">事务的ACID特性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6"><span class="toc-text">并发调度</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%E8%B0%83%E5%BA%A6-schedule-%EF%BC%9A"><span class="toc-text">什么是事务调度(schedule)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E8%B0%83%E5%BA%A6%E4%B9%8B%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="toc-text">事务调度之正确性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E8%B0%83%E5%BA%A6%E4%B9%8B%E5%8F%AF%E4%B8%B2%E8%A1%8C%E6%80%A7"><span class="toc-text">事务调度之可串行性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E8%B0%83%E5%BA%A6%E4%B9%8B%E5%86%B2%E7%AA%81"><span class="toc-text">事务调度之冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E8%B0%83%E5%BA%A6%E4%B9%8B%E5%86%B2%E7%AA%81%E5%8F%AF%E4%B8%B2%E8%A1%8C%E6%80%A7"><span class="toc-text">事务调度之冲突可串行性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E5%8F%AF%E4%B8%B2%E8%A1%8C%E6%80%A7%E5%88%A4%E5%88%AB%E7%AE%97%E6%B3%95"><span class="toc-text">冲突可串行性判别算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%B0%81%E9%94%81%E7%9A%84%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="toc-text">基于封锁的并发控制方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">锁的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E9%94%81%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">关于锁的基本知识点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E9%94%81%E5%8D%8F%E8%AE%AE%E4%B9%8B%E9%94%81%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">封锁协议之锁的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E4%BB%96%E9%94%81X"><span class="toc-text">排他锁X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E9%94%81S"><span class="toc-text">共享锁S</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E9%94%81U"><span class="toc-text">更新锁U</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E9%94%81I"><span class="toc-text">增量锁I</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E9%94%81%E5%8D%8F%E8%AE%AE0%E7%BA%A7%E5%88%B03%E7%BA%A7%E5%8D%8F%E8%AE%AE%EF%BC%88%E5%8A%A0%E9%94%81%E7%9A%84%E6%97%B6%E6%9C%BA%EF%BC%89"><span class="toc-text">封锁协议0级到3级协议（加锁的时机）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%8F%E8%AF%BB%E3%80%81%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E3%80%81%E5%B9%BB%E8%AF%BB%EF%BC%9A"><span class="toc-text">脏读、不可重复读、幻读：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E4%B9%8B%E9%9A%94%E7%A6%BB%E6%80%A7%E7%BA%A7%E5%88%AB"><span class="toc-text">SQL之隔离性级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E6%AE%B5%E5%B0%81%E9%94%81%E5%8D%8F%E8%AE%AE"><span class="toc-text">两段封锁协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%97%B6%E9%97%B4%E6%88%B3%E7%9A%84%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="toc-text">基于时间戳的并发控制方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E6%9C%89%E6%95%88%E6%80%A7%E7%A1%AE%E8%AE%A4%E7%9A%84%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="toc-text">基于有效性确认的并发控制方法</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第22讲-数据库事务处理技术"><a href="#第22讲-数据库事务处理技术" class="headerlink" title=" 第22讲 数据库事务处理技术"></a> 第22讲 数据库事务处理技术</h2><p>为了更好的性能，我们需要并行处理数据库事务</p>
+<h1 id="什么是并发控制？"><a href="#什么是并发控制？" class="headerlink" title="什么是并发控制？"></a>什么是并发控制？</h1><p>就比如我们买票</p>
+<p>如果大家同时买起点终点、日期、车次相同 的车票，会否买到座位相重复的车票？</p>
+<p>很显然如果服务不能很好的进行并发控制，就会导致一张票被卖了两次，进而出现我们不想要的结果</p>
+<p>常见的三种并发问题：</p>
+<ol>
+<li>丢失修改（同一数据被两个事务同时操作，其中一个事务的结果被另一个事务的结果覆盖）</li>
+<li>不可重复读（第一次读和第二次读结果不一样）</li>
+<li>脏读（读到了已被回滚的数据）</li>
+</ol>
+<h1 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h1><p>事务是数据库管理系统提供的控制数据操作的一种手段，通过这一手段，应 用程序员将一系列的数据库操作组合在一起作为一个整体进行操作和控制， 以便数据库管理系统能够提供一致性状态转换的保证。</p>
+<p>一个事务可处理一个数据或一条记录（从帐户A过户5000到帐户B上），也可能处理一批数据或一批记录</p>
+<p>例如：下面的操作即为一个事务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">read(A);</span><br><span class="line">A := A – 5000;</span><br><span class="line">write(A);</span><br><span class="line">read(B);</span><br><span class="line">B := B + 5000;</span><br><span class="line">write(B);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>所以说</p>
+<p><strong>并发控制就是 通过事务微观 交错执行次序 的正确安排， 保证事务宏观上的独立性、完整性和正确性</strong></p>
+<h2 id="事务的ACID特性"><a href="#事务的ACID特性" class="headerlink" title="事务的ACID特性"></a>事务的ACID<strong>特性</strong></h2><ul>
+<li><p><strong>原子性Atomicity :</strong> <strong>DBMS能够保证事务的一组更新操作是原子不可分的，即对 DB而言，要么全做，要么全不做</strong></p>
+</li>
+<li><p><strong>一致性Consistency⭐:</strong> <strong>DBMS保证事务的操作状态是正确的，符合一致性的操作</strong> <strong>规则，不能出现三种典型的不一致性。它是进一步由隔离性来保证的。</strong></p>
+</li>
+<li><p><strong>隔离性Isolation:</strong> <strong>DBMS保证并发执行的多个事务之间互相不受影响。例如两个</strong> <strong>事务T1和T2, 即使并发执行，也相当于或 者先执行了T1,再执行T2;或者先执行了T2,再执行T1。</strong></p>
+</li>
+<li><p><strong>持久性Durability:</strong> <strong>DBMS保证已提交事 务的影响是持久的，被撤销事务的影响是可恢复的。</strong></p>
+</li>
+</ul>
+<h1 id="并发调度"><a href="#并发调度" class="headerlink" title="并发调度"></a>并发调度</h1><h2 id="什么是事务调度-schedule-："><a href="#什么是事务调度-schedule-：" class="headerlink" title="什么是事务调度(schedule)："></a>什么是事务调度(schedule)：</h2><p>一组事务的基本步(读、写、其他控 制操作如加锁、解锁等)的一种执行顺序称为对这组事务的一个调度。 </p>
+<p>并发(或并行)调度：多个事务从宏观上看是并行执行的，但其微观上的基本 操作(读、写)则是交叉执行的。</p>
+<h2 id="事务调度之正确性"><a href="#事务调度之正确性" class="headerlink" title="事务调度之正确性"></a>事务调度之正确性</h2><p>当且仅当在这个并发调度下所得到的新数据库结果与分别串行地运行这些事务所得的新数据库完全一致，则说调度是正确的。</p>
+<h2 id="事务调度之可串行性"><a href="#事务调度之可串行性" class="headerlink" title="事务调度之可串行性"></a>事务调度之<strong>可串行性</strong></h2><p>如果不管数据库初始状态如何，一个调度对数据库状态的影响都和某个<strong>串行调度</strong>相同，则我们说这个调度是可串行化的 (Serializable)或具有可串行性(Serializability)。</p>
+<p><img src="https://img2020.cnblogs.com/blog/2233855/202101/2233855-20210129094641467-649613231.png"></p>
+<ul>
+<li>可串行化调度一定是正确的并行调度，但正确的并行调度，却未必都是可串行化的调度</li>
+<li>并行调度的正确性是指内容上结果正确性，而可串行性是指形式上结果正确性，便于操作。</li>
+<li>可串行化的等效串行序列不一定唯一</li>
+</ul>
+<h2 id="事务调度之冲突"><a href="#事务调度之冲突" class="headerlink" title="事务调度之冲突"></a>事务调度之冲突</h2><p>调度中一对连续的动作，它们满足：如果它们的顺序交换，那么涉及的事务中至少有一个事务的行为会改变。</p>
+<p>有冲突的两个操作是不能交换次序的，没有冲突的两个事务是可交换的</p>
+<ul>
+<li>同一个事务的任何两个操作都是冲突的</li>
+</ul>
+<ul>
+<li>  不同事务对同一元素的两个写操作是冲突的</li>
+<li>  不同事务对同一元素的一读一写操作是冲突的</li>
+</ul>
+<h2 id="事务调度之冲突可串行性"><a href="#事务调度之冲突可串行性" class="headerlink" title="事务调度之冲突可串行性"></a>事务调度之冲突可串行性</h2><p>一个调度，如果通过交换相邻两个无冲突的操作能够转换到某一个串行的调度，则称此调度为冲突可串行化的调度。    </p>
+<ul>
+<li>  冲突可串行性是比可串行性要严格的概念</li>
+<li>  满足冲突可串行性，一定满足可串行性；反之不然</li>
+</ul>
+<h2 id="冲突可串行性判别算法"><a href="#冲突可串行性判别算法" class="headerlink" title="冲突可串行性判别算法"></a>冲突可串行性判别算法</h2><ol>
+<li><p>构造一个前驱图(有向图)</p>
+</li>
+<li><p>结点是每一个事务Ti。如果Ti的一个操作与Tj的一个操作发生冲突，且Ti在 Tj前执行，则绘制一条边，由Ti指向Tj, 表征Ti要在Tj前执行。</p>
+</li>
+<li><p>测试检查: 如果此有向图没有环，则是冲突可串行化的</p>
+</li>
+</ol>
+<p>一道习题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yueguanghaidao/article/details/6761540">冲突可串行的判定</a></p>
+<h1 id="基于封锁的并发控制方法"><a href="#基于封锁的并发控制方法" class="headerlink" title="基于封锁的并发控制方法"></a><strong>基于封锁的并发控制方法</strong></h1><h2 id="锁的概念"><a href="#锁的概念" class="headerlink" title="锁的概念"></a>锁的概念</h2><p>锁是控制并发的一种手段，<strong>是数据库元素上的并发控制标志</strong></p>
+<h2 id="关于锁的基本知识点"><a href="#关于锁的基本知识点" class="headerlink" title="关于锁的基本知识点"></a>关于锁的基本知识点</h2><ul>
+<li>  每一数据元素都有唯一的锁</li>
+<li>  每一事务读写数据元素前，要获得锁</li>
+<li>  如果被其他事务持有该元素的锁，则要等待</li>
+<li>  事务处理完成后要释放锁</li>
+<li>  锁本身并不能保证冲突可串行性，只是为调度提供了控制的手段，具体如何使用锁需要说明——不同协议</li>
+</ul>
+<h2 id="封锁协议之锁的类型"><a href="#封锁协议之锁的类型" class="headerlink" title="封锁协议之锁的类型"></a>封锁协议之锁的类型</h2><h3 id="排他锁X"><a href="#排他锁X" class="headerlink" title="排他锁X"></a>排他锁X</h3><p>只有一个事务能读和写，其他任何事务都不能读、写</p>
+<h3 id="共享锁S"><a href="#共享锁S" class="headerlink" title="共享锁S"></a>共享锁S</h3><p>所有事务都可以读，但任何事务都不能写</p>
+<h3 id="更新锁U"><a href="#更新锁U" class="headerlink" title="更新锁U"></a>更新锁U</h3><p>初始读，以后可以升级为写</p>
+<h3 id="增量锁I"><a href="#增量锁I" class="headerlink" title="增量锁I"></a>增量锁I</h3><p>区分增量更新和其他类型的更新</p>
+<h2 id="封锁协议0级到3级协议（加锁的时机）"><a href="#封锁协议0级到3级协议（加锁的时机）" class="headerlink" title="封锁协议0级到3级协议（加锁的时机）"></a>封锁协议0级到3级协议（加锁的时机）</h2><ul>
+<li> <strong>0级协议</strong>  有写要求的数据对象A加排他锁，不再访 问后即刻解锁。可防止丢失修改，但允许 脏读，允许重复读错误</li>
+<li> <strong>1级协议</strong> 有写要求的数据对象A加排他锁，事务提 交时刻解锁。可防止丢失修改，可恢复,防止脏读，允许重复读错误</li>
+<li> <strong>2级协议</strong>  有写要求的数据对象A加排他锁，事务提 交时刻解锁。有读要求的数据对象B加共 享锁，不再访问后即刻解锁。可防止丢失 修改，防止脏读，防止重复读错误，但是不能解决幻读</li>
+<li> <strong>3级协议</strong> 有写要求的数据对象A加排他锁，事务提 交时刻解锁。有读要求的数据对象B加共 享锁，事务提交时刻解锁。防止所有不一致性</li>
+</ul>
+<h2 id="脏读、不可重复读、幻读："><a href="#脏读、不可重复读、幻读：" class="headerlink" title="脏读、不可重复读、幻读："></a>脏读、不可重复读、幻读：</h2><p> <strong>脏读：</strong></p>
+<p>所谓的脏读，其实就是读到了别的事务回滚前的脏数据。比如事务B执行过程中修改了数据X，在未提交前，事务A读取了X，而事务B却回滚了，这样事务A就形成了脏读。</p>
+<p>也就是说，当前事务读到的数据是别的事务想要修改成为的但是没有修改成功的数据。</p>
+<p> <strong>不可重复读：</strong></p>
+<p>事务A首先读取了一条数据，然后执行逻辑的时候，事务B将这条数据改变了，然后事务A再次读取的时候，发现数据不匹配了，就是所谓的不可重复读了。</p>
+<p>也就是说，当前事务先进行了一次数据读取，然后再次读取到的数据是别的事务修改成功的数据，导致两次读取到的数据不匹配，也就照应了不可重复读的语义。</p>
+<p> <strong>幻读：</strong></p>
+<p>事务A首先根据条件索引得到N条数据，然后事务B改变了这N条数据之外的M条或者增添了M条符合事务A搜索条件的数据，导致事务A再次搜索发现有N+M条数据了，就产生了幻读。</p>
+<p>也就是说，当前事务读第一次取到的数据比后来读取到数据条目少。</p>
+<h2 id="SQL之隔离性级别"><a href="#SQL之隔离性级别" class="headerlink" title="SQL之隔离性级别"></a>SQL之隔离性级别</h2><p><strong>读未提交(read uncommitted) —相当于0级协议</strong> </p>
+<p><strong>读已提交</strong> <strong>(read</strong> committed) <strong>—相当于1级协议</strong> </p>
+<p><strong>可重复读(repeatable read)—相当于2级协议</strong></p>
+<p><strong>可串行化(serializable) —相当于3级协议</strong> </p>
+<p><a target="_blank" rel="noopener" href="https://www.xrervip.tk/2021/08/24/Serializable/">详细说明</a></p>
+<h2 id="两段封锁协议"><a href="#两段封锁协议" class="headerlink" title="两段封锁协议"></a>两段封锁协议</h2><p>是一种基于锁的并发控制方法。读写数据之前，每个事务中所有封锁请求先于任何一个解锁请求。</p>
+<p>两阶段：加锁段和解锁段。加锁段不能有解锁操作，解锁段不能有加锁操作。</p>
+<p> <strong>作用</strong></p>
+<p>两段封锁协议是可以保证冲突可串行性的。</p>
+<p>注意：两段封锁协议是可能产生死锁的协议</p>
+<h2 id="基于时间戳的并发控制方法"><a href="#基于时间戳的并发控制方法" class="headerlink" title="基于时间戳的并发控制方法"></a>基于时间戳的并发控制方法</h2><p>基于时间戳的并发控制方法：借助于时间戳，强制使一组并发事务的交叉执行，等价于一个特定顺序的串行执行</p>
+<p>具体操作就是<strong>执行时判断冲突</strong>，如无冲突，予以执行；如有冲突，则撤销事务，并 重启该事务，此时该事务获得了一个更大的时间戳， 表明是后执行的事务。</p>
+<p><strong>有哪些冲突：</strong></p>
+<ul>
+<li><p><strong>读-读无冲突；</strong></p>
+</li>
+<li><p><strong>读-写或写-读冲突；</strong></p>
+</li>
+<li><p><strong>写-写冲突</strong></p>
+</li>
+</ul>
+<p><strong>具体规则：</strong></p>
+<p>对DB中的每个数据元素x，系统保留其上的最大时间戳</p>
+<p><strong>RT(x):</strong> <strong>即R-timestamp(x) 读过该数据事务中最大的时间戳，即最后读x的事务的时间戳。</strong></p>
+<p><strong>WT(x):</strong> <strong>即W-timestamp(x)写过该数据事务中最大的时间戳，即最后写x的事务的时间戳。</strong></p>
+<p><strong>事务的时间戳</strong></p>
+<p><strong>TS(T) 即TimeStamp</strong></p>
+<p><strong>读-写并发</strong>：(读-写、写-读)<br>若T事务读x，则将T的时间戳TS与WT(x)比较:<br>若TS大(T后进行)，则允许T操作，并且更改RT(x)为max{RT(x),TS}；<br>否则，有冲突，撤回T，重启T。<br>若T事务写x，则将T的时间戳TS与RT(x)比较：<br>若TS大(T后进行)，则允许T操作，并且更改WT(x)为max{WT(x),TS}；<br>否则，有冲突，撤回T重做。</p>
+<p><strong>写-写并发</strong> </p>
+<p>若T事务写x，则将T的时间戳TS与WT(x)比较：<br>若TS大，则允许T写，并且更改WT(x)为T的时间戳；<br>否则有冲突，T撤回重做。</p>
+<p>前述规则可以解决事务T<strong>过晚的读</strong>和<strong>过晚的写</strong></p>
+<p>但是这两种“事实上 不可实现的”冲 突可以避免了，实用性很有限</p>
+<p>因此引入<strong>另一种调度规则</strong></p>
+<p>对DB中的每个数据元素x，系统保留其上的最大时间戳</p>
+<p>RT(x): 即R-timestamp(x) </p>
+<p>  读过该数据事务中最大的时间戳，即最后读x的事务的时间戳。</p>
+<p>WT(x): 即W-timestamp(x) </p>
+<p>  写过该数据事务中最大的时间戳，即最后写x的事务的时间戳。</p>
+<p>C(x): x的提交位。 </p>
+<p>​    该位为真，当且仅当最近写x的事务已经提交。</p>
+<p>C(x)的目的是避免出现事务读另一事务U所写数据然后U终止或者被撤销这样的情况。</p>
+<p><strong>对来自事务T的读写请求，调度器可以：</strong></p>
+<ul>
+<li><p><strong>同意请求</strong></p>
+</li>
+<li><p>撤销/终止T，并重启具有新时间戳的T(终止+重启，被称回滚)</p>
+</li>
+<li><p>推迟T，并在以后决定是终止T还是同意请求(如果请求是读，且此读可能是 脏的)</p>
+</li>
+</ul>
+<p><strong>调度规则</strong></p>
+<ul>
+<li><strong>假设调度器收到请求rT(X)</strong></li>
+</ul>
+<p>(1)如果TS(T)&gt;=WT(x), 此读是事实上可实现的</p>
+<p> 如C(x)为真，    同意请求。如果TS(T)&gt;RT(x), 置RT(x):=TS(T); 否则不改变RT(x).</p>
+<p> 如C(x)为假，推迟Ｔ直到C(x)为真或写x的事务终止。</p>
+<p>(2)如果TS(T)&lt;WT(x), 此读是事实上不可实现的</p>
+<p>回滚T(终止并重启T)；(过晚的读)</p>
+<ul>
+<li><strong>假设调度器收到请求wT(X)</strong></li>
+</ul>
+<p>(1)如果TS(T)&gt;=RT(x), 且TS(T)&gt;=WT(x), 此写是事实上是可实现的</p>
+<p>为x写入新值；置WT(x):=TS(T)；置C(x):=false.</p>
+<p>(2)如果TS(T)&gt;=RT(x),但是TS(T)&lt;WT(x)，此写是事实上可实现的。但x 已经有一个更晚的值</p>
+<p>如果C(x)为真，那么前一个x的写已提交；则忽略T的写；继续进行。(托马斯写规则)<br>如果C(x)为假，则我们需推迟T，直到C(x)为真或写x的事务终止。</p>
+<p>(3)如果TS(T)&lt;RT(x), 此写是事实上不可实现的<br>T必须回滚。(过晚的写)</p>
+<ul>
+<li><strong>假设调度器收到提交T的请求。</strong></li>
+</ul>
+<p>它必须找到T所写的所有数据库元素x, 并置C(x):=true。</p>
+<p>如果有任何等待x被提交的事务，这些事务就被允许继续进行。</p>
+<ul>
+<li><strong>假设调度器收到终止T的请求</strong></li>
+</ul>
+<p>像前述步骤一样确定回滚T。</p>
+<p>那么任何等待T所写元素x的事务必须重新尝试 读或写，看这一动作现在T的写被终止后是否合法。</p>
+<p><strong>基于时间戳的并发控制的思想</strong></p>
+<p> 事务在启动时刻被赋予唯一的时间戳，以示其启动顺序。<br> 为每一数据库元素保存读时间戳和写时间戳，以记录读或写该数据元素的最 后的事务。<br> 通过在事务读写数据时判断是否存在冲突(读写冲突、写读冲突、写写冲突) 来强制事务以可串行化的方式执行。</p>
+<h2 id="基于有效性确认的并发控制方法"><a href="#基于有效性确认的并发控制方法" class="headerlink" title="基于有效性确认的并发控制方法"></a>基于有效性确认的并发控制方法</h2><p><strong>基于有效性确认的并发控制的思想</strong></p>
+<p> 事务在启动时刻被赋予唯一的时间戳，以示其启动顺序。<br> 为每一活跃事务保存其读写数据的集合，RS(T)：事务T读数据的集合； WS(T)：事务T写数据的集合。<br> 通过对多个事务的读写集合，判断是否有冲突(存在事实上不可实现的行为)，即有效性确认，来完成事务的提交与回滚，强制事务以可串行化的方式执行</p>
+<p><strong>基于有效性确认的调度器</strong></p>
+<p> 事务在启动时刻被赋予唯一的时间戳，以示其启动顺序。<br> 每一事务读写数据的集合</p>
+<ul>
+<li><p>RS(T)：事务T读数据的集合；</p>
+</li>
+<li><p>WS(T)：事务T写数据的集合。</p>
+</li>
+</ul>
+<p><strong>事务分三个阶段进行</strong> </p>
+<ol>
+<li><strong>读阶段</strong>。事务从数据库中读取读集合中的所有元素。事务还在其局部地址空间计算它将要写的所有值；</li>
+<li><strong>有效性确认阶段</strong>。调度器通过比较该事务与其它事务的读写集合<br>  来确认该事务的有效性。</li>
+<li><strong>写阶段</strong>。事务往数据库中写入其写集合中元素的值。<br>   每个成功确认的事务是在其有效性确认的瞬间执行的。<br>   并发事务串行的顺序即事务有效性确认的顺序。</li>
+</ol>
+<p><strong>调度器维护三个集合</strong></p>
+<ul>
+<li>START集合。已经开始但尚未完成有效性确认的事务集合。对此<br>集合中的事务，调度器维护START(T)，即事务T开始的时间。</li>
+<li>VAL集合。已经确认有效性但尚未完成第3阶段写的事务。对此集<br>合中的事务，调度器维护START(T)和VAL(T)，即T确认的时间。</li>
+<li>FIN集合。已经完成第3阶段的事务。对这样的事务T,START(T), VAL(T)和FIN(T)，即T完成的时间。</li>
+</ul>
+<p><strong>有效性确认规则</strong></p>
+<p>-(1)对于所有已经过有效性确认, 且在T开始前没有完成的U（<strong>U已经过有效性确认</strong>）, 即对于满足 FIN(U)&gt;START(T)（<strong>U在T开始前没有完成。</strong>）的U,检测:</p>
+<p>RS(T) ∩WS(U)是否为空。 </p>
+<p>若为空，则确认。否则，不予确认。</p>
+<p>其含义是：<strong>如果一个较早的事务U现在正在写入T应该</strong> <strong>读过的某些对象，则T的有效性不能确认</strong></p>
+<p>(2)对于所有已经过有效性确认，且在T有效性确认前没有完成的U（<strong>U有效性已经成功确认</strong>）, 即对于 满足FIN(U)&gt;VAL(T)的U（<strong>U在T进入其有效性确认阶段以前没有完成</strong>）, 检测：WS(T) ∩WS(U)是否为空。 </p>
+<p>若为空，则确认。否则，不予确认。</p>
+<p>其含义是：<strong>如果T在有效性确认后可能比一个较早的事 务先写某个对象，则T的有效性不能确认</strong></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载无需注明来源，放弃所有权利 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    2018-2077 f2quantum
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
