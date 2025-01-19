@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>压缩WSL2占用的磁盘空间 | Blog 计划</title>
+  <title>WSL操作指南 | Blog 计划</title>
   <meta name="keywords" content=" 折腾 ">
-  <meta name="description" content="压缩WSL2占用的磁盘空间 | Blog 计划">
+  <meta name="description" content="WSL操作指南 | Blog 计划">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="About me关于我A Fzquantum PROJECT    🔭 I’m currently working on 🐦Cainiao-Alibaba Group, China (Java CRUD Engineer Intern but GDBL P4 ) 🌱 I’m currently learning J2EE ,DataBase ,C++, Go ,Distributed Sys">
 <meta property="og:type" content="website">
@@ -381,7 +381,7 @@
            href="/2025/01/19/cleanup-wsl-storage/"
            data-tag="折腾"
            data-author="" >
-            <span class="post-title" title="压缩WSL2占用的磁盘空间">压缩WSL2占用的磁盘空间</span>
+            <span class="post-title" title="WSL操作指南">WSL操作指南</span>
             <span class="post-date" title="2025-01-19 21:54:03">2025/01/19</span>
         </a>
         
@@ -693,7 +693,7 @@
     <div class="pjax">
         <article id="post-cleanup-wsl-storage" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">压缩WSL2占用的磁盘空间</h1>
+        <h1 class="article-title">WSL操作指南</h1>
     
     <div class="article-meta">
         
@@ -710,7 +710,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2025-01-19 22:05:10'>2025-01-19 21:54</time>
+            Created At : <time class="date" title='Updated At: 2025-01-19 23:12:04'>2025-01-19 21:54</time>
         
     </div>
     <div class="article-meta">
@@ -732,7 +732,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%81%9C%E6%AD%A2%E8%BF%90%E8%A1%8CWSL%E5%AE%9E%E4%BE%8B"><span class="toc-text">停止运行WSL实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEWSL-%E7%A3%81%E7%9B%98%E5%9C%B0%E5%9D%80"><span class="toc-text">寻找WSL 磁盘地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8Windows%E4%B8%AD%E5%90%AF%E5%8A%A8diskpart%EF%BC%8C%E5%B9%B6%E6%89%A7%E8%A1%8C%E6%B8%85%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">在Windows中启动diskpart，并执行清理命令</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E5%91%BD%E5%90%8DWSL%E5%AE%9E%E4%BE%8B%E5%90%8D%E7%A7%B0"><span class="toc-text">重命名WSL实例名称</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8A%E6%94%BEWSL%E5%B7%B2%E5%88%86%E9%85%8D%E4%BD%86%E6%98%AF%E6%9C%AA%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4"><span class="toc-text">释放WSL已分配但是未占用空间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%81%9C%E6%AD%A2%E8%BF%90%E8%A1%8CWSL%E5%AE%9E%E4%BE%8B"><span class="toc-text">停止运行WSL实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEWSL-%E7%A3%81%E7%9B%98%E5%9C%B0%E5%9D%80"><span class="toc-text">寻找WSL 磁盘地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8Windows%E4%B8%AD%E5%90%AF%E5%8A%A8diskpart%EF%BC%8C%E5%B9%B6%E6%89%A7%E8%A1%8C%E6%B8%85%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">在Windows中启动diskpart，并执行清理命令</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -748,17 +748,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>WSL占用的宿主机空间和实体机Linux不同的是，其已经占用的空间不会随着WSL内部文件的删除而释放，这样就会导致其占用额外的磁盘空间，这里对操作的指令进行备份，方便后续查询</p>
+        <h1 id="重命名WSL实例名称"><a href="#重命名WSL实例名称" class="headerlink" title="重命名WSL实例名称"></a>重命名WSL实例名称</h1><ol>
+<li><p><code>wsl --shutdown</code> 关闭所有的子系统</p>
+</li>
+<li><p>Win+R 启动windows运行窗口，输入<code>regedit</code>打开注册表管理器</p>
+</li>
+<li><p>前往<code>计算机\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Lxss\</code><br>可以看到很多子目录，即为WSL实例<br><img src="https://i.miji.bid/2025/01/19/6af742dd7345ec8c8465393d1b66d3bd.png" alt="6af742dd7345ec8c8465393d1b66d3bd.png"></p>
+</li>
+<li><p>选择需要修改的实例，修改其数据字段<code>DistributionName</code>对应的数值<img src="https://i.miji.bid/2025/01/19/e47a970eace4f61758d925eb46197869.png" alt="e47a970eace4f61758d925eb46197869.png"></p>
+</li>
+<li><p>重新启动wsl进程<br>参考： <a target="_blank" rel="noopener" href="https://gist.github.com/aronreisx/2de3d04e35003e2a167c28525013ff58">tutorial-rename-wsl-disto.txt</a></p>
+<h1 id="释放WSL已分配但是未占用空间"><a href="#释放WSL已分配但是未占用空间" class="headerlink" title="释放WSL已分配但是未占用空间"></a>释放WSL已分配但是未占用空间</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2></li>
+</ol>
+<p>WSL占用的宿主机空间和实体机Linux不同的是，其已经占用的空间不会随着WSL内部文件的删除而释放，这样就会导致其占用额外的磁盘空间，这里对操作的指令进行备份，方便后续查询</p>
 <h1 id="停止运行WSL实例"><a href="#停止运行WSL实例" class="headerlink" title="停止运行WSL实例"></a>停止运行WSL实例</h1><p>解除对WSL所使用的VHDX文件的占用，IDE比如vscode也要停掉，不然有IO会导致拒绝访问问题</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--shutdown</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="寻找WSL-磁盘地址"><a href="#寻找WSL-磁盘地址" class="headerlink" title="寻找WSL 磁盘地址"></a>寻找WSL 磁盘地址</h1><p>默认实在这个路径：<code>%USERPROFILE%\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu*\LocalState\ext4.vhdx</code></p>
+<h2 id="寻找WSL-磁盘地址"><a href="#寻找WSL-磁盘地址" class="headerlink" title="寻找WSL 磁盘地址"></a>寻找WSL 磁盘地址</h2><p>默认实在这个路径：<code>%USERPROFILE%\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu*\LocalState\ext4.vhdx</code></p>
 <p>比如我的路径就是：<code>%USERPROFILE%\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState</code></p>
-<h1 id="在Windows中启动diskpart，并执行清理命令"><a href="#在Windows中启动diskpart，并执行清理命令" class="headerlink" title="在Windows中启动diskpart，并执行清理命令"></a>在Windows中启动diskpart，并执行清理命令</h1><p>启动diskpart</p>
+<h2 id="在Windows中启动diskpart，并执行清理命令"><a href="#在Windows中启动diskpart，并执行清理命令" class="headerlink" title="在Windows中启动diskpart，并执行清理命令"></a>在Windows中启动diskpart，并执行清理命令</h2><p>启动diskpart</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">diskpart</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>然后输入下面的指令先选中磁盘文件，然后对其进行合并（压缩）：</p>
 <p>注意需要转为真实路径，<code>%USERPROFILE%</code> 可能会遇到一些问题</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 替换为你的路径 </span><br><span class="line">select vdisk file=&quot;C:\Users\fzquantum\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\ext4.vhdx&quot;</span><br><span class="line"></span><br><span class="line"><span class="built_in">compact</span> vdisk</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 替换为你的路径 </span><br><span class="line">select vdisk file=&quot;C:\Users\fzquantum\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\ext4.vhdx&quot;</span><br><span class="line"></span><br><span class="line"><span class="built_in">compact</span> vdisk</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.miji.bid/2025/01/19/b786d07fb1076c34a70a3ad6eed89b68.png" alt="b786d07fb1076c34a70a3ad6eed89b68.png"></p>
 <p>下图是清理前后的区别：</p>
